@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FC3E51</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FC3E51</color>
+    <color name="toolbar_bg">#FC3E51</color>
+    <!--主题背景色-->
+    <color name="defualt_window_background">#F7F7F7</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="colorChecked">#FFFFFF</color>
+    <color name="colorUnchecked">#FFFFFF</color>
+    <color name="TRANSLUCENT">#00000000</color>
+</resources>

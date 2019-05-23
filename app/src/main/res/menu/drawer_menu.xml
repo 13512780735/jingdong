@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+   >
+    <group android:id="@+id/menu_group_1" android:checkableBehavior="single"
+        >
+
+        <item
+            android:id="@+id/menu_feed"
+            android:icon="@mipmap/icon_home_select"
+            android:title="首页" />
+        <item
+            android:id="@+id/menu_direct"
+            android:icon="@mipmap/icon_home_unshop"
+            android:title="全部商品" />
+        <item
+            android:id="@+id/menu_news"
+            android:icon="@mipmap/icon_home_uncart"
+            android:title="购物车" />
+        <item
+            android:id="@+id/menu_popular"
+            android:icon="@mipmap/icon_home_unset"
+            android:title="管理" />
+    </group>
+</menu>

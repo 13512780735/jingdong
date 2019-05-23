@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.LoginActivity">
+
+
+    <FrameLayout
+        android:id="@+id/ll_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/logo_bg" />
+
+                <LinearLayout
+                    android:id="@+id/ll_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="@dimen/dp_10"
+                        android:text="帐号/手机登录" />
+
+                    <likeit.com.jingdong.view.BorderRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/dp_10"
+                        app:contentBackColor="@color/white"
+                        app:cornerRadius="@dimen/dp_5"
+                        app:strokeColor01="#999999"
+                        app:strokeWidth01="1dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_centerVertical="true"
+                            android:hint="请输入用户名/手机登录"
+                            android:padding="@dimen/dp_5" />
+                    </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                    <likeit.com.jingdong.view.BorderRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/dp_10"
+                        app:contentBackColor="@color/white"
+                        app:cornerRadius="@dimen/dp_5"
+                        app:strokeColor01="#999999"
+                        app:strokeWidth01="1dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:layout_centerVertical="true"
+                            android:hint="请输入登录密码"
+                            android:padding="@dimen/dp_5" />
+                    </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:padding="@dimen/dp_10"
+                        android:textColor="#3897F7"
+                        android:text="忘记密码？"
+                        android:visibility="invisible"
+                        />
+
+                    </LinearLayout>
+
+
+                    <likeit.com.jingdong.view.BorderTextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/dp_10"
+                        android:gravity="center"
+                        android:padding="@dimen/dp_5"
+                        android:text="登录"
+                        android:textColor="@color/white"
+                        app:contentBackColor="#CD031B"
+                        app:cornerRadius="@dimen/dp_5"
+                        app:strokeColor01="#CD031B"
+                        app:strokeWidth01="0dp"></likeit.com.jingdong.view.BorderTextView>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width80"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dp_10"
+            android:text="Copyright © 2019 京东家装 | 灯聚 All Rights Reserved" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/dp_10"
+            android:text="广州来亿信息科技有限公司（技术支持）" />
+    </LinearLayout>
+
+
+</LinearLayout>
