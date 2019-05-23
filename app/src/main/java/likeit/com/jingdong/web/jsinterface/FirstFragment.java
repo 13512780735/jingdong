@@ -44,6 +44,7 @@ public class FirstFragment extends BaseFragment<JsInterfaceContract.Presenter> i
 
     private void initUI(View view) {
         mWebView = view.findViewById(R.id.main_web);
+        mWebView.loadUrl(url);
     }
 
 //    private void initUI(View view) {
