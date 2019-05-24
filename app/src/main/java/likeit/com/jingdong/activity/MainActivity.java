@@ -8,20 +8,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.creativesource.simpledrawerlayout.SimpleDrawerLayout;
 
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.web.jsinterface.FirstFragment;
 import likeit.com.jingdong.fragment.FourthFragment;
 import likeit.com.jingdong.fragment.SecondFragment;
 import likeit.com.jingdong.fragment.ThirdFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements OnFinishListener {
     private View navigation;
-    private TextView option_1, option_2, option_3, option_4;
+    private RadioButton option_1, option_2, option_3, option_4;
     private SimpleDrawerLayout drawerLayout;
     public static Fragment restoreFragment;
     private Fragment fragment;
@@ -46,45 +48,36 @@ public class MainActivity extends BaseActivity {
         mRadioGroup = findViewById(R.id.mRadioGroup);
         drawerLayout = findViewById(R.id.simple_drawer_layout);
         fragmentManager = getSupportFragmentManager();
-//        WindowManager wm = this.getWindowManager();//获取屏幕宽高
-//        int width1 = wm.getDefaultDisplay().getWidth();
-//        int height1 = wm.getDefaultDisplay().getHeight();
-//        ViewGroup.LayoutParams para= drawerLayout.getLayoutParams();//获取drawerlayout的布局
-//        para.width=width1/3*2;//修改宽度
-//        para.height=height1;//修改高度
-//        drawerLayout.setLayoutParams(para); //设置修改后的布局。
         navigation = option_1;
-     //   option_1.setBackgroundColor(getResources().getColor(R.color.colorChecked));
         fragment = new FirstFragment();
         fragmentManager.beginTransaction().add(R.id.fl_content_main, fragment).commit();
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 drawerLayout.closeDrawers();
-                switch (group.getCheckedRadioButtonId()){
+                switch (group.getCheckedRadioButtonId()) {
                     case R.id.tv_option1:
                         animateNavigation(option_1);
-
                         fragment = new FirstFragment();
                         MainActivity.restoreFragment = fragment;
                         fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
                         break;
                     case R.id.tv_option2:
-                      animateNavigation(option_2);
-                       // drawerLayout.closeDrawers();
+                        animateNavigation(option_2);
+                        // drawerLayout.closeDrawers();
                         fragment = new SecondFragment();
                         MainActivity.restoreFragment = fragment;
                         fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
                         break;
                     case R.id.tv_option3:
-                      animateNavigation(option_3);
-                       // drawerLayout.closeDrawers();
+                        animateNavigation(option_3);
+                        // drawerLayout.closeDrawers();
                         fragment = new ThirdFragment();
                         MainActivity.restoreFragment = fragment;
                         fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
                         break;
                     case R.id.tv_option4:
-                     animateNavigation(option_4);
+                        animateNavigation(option_4);
                         //drawerLayout.closeDrawers();
                         fragment = new FourthFragment();
                         MainActivity.restoreFragment = fragment;
@@ -94,13 +87,13 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void animateNavigation(View view) {
 
-        if(navigation == null) {
+        if (navigation == null) {
             navigation = view;
             navigation.setBackgroundColor(getResources().getColor(R.color.colorChecked));
-        }
-        else {
+        } else {
             navigation.setBackgroundColor(getResources().getColor(R.color.colorUnchecked));
             view.setBackgroundColor(getResources().getColor(R.color.colorChecked));
             navigation = view;
@@ -115,5 +108,16 @@ public class MainActivity extends BaseActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSuccess(int position) {
+        if (position == 2) {
+            mRadioGroup.clearCheck();
+            option_3.setChecked(true);
+        } else if (position == 1) {
+            mRadioGroup.clearCheck();
+            option_3.setChecked(true);
+        }
     }
 }

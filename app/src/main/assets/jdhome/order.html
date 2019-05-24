@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+
+	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="static/css/order.css" />
+
+</head>
+
+<body>
+	<div class="order">
+
+		<div id="orderBtn">
+			支付订单
+		</div>
+
+		<div class="optionBtns">
+			<span id="kuaidi">快递配送</span>
+			<span id="ziti">门店自提</span>
+		</div>
+
+		<div class="phone">
+			<div class="inner">
+				<div class="title">请填写取货手机号：</div>
+				<div class="bg">
+					<div class="item">
+						<input type="number" placeholder="请输入手机号" oninput="if(value.length>11)value=value.slice(0,11)">
+						<input type="button" value="获取验证码">
+					</div>
+					<div class="item">
+						<input type="number" placeholder="请输入验证码">
+					</div>
+					<div class="item confirmBox">
+						<input type="button" id="confirm" value="确定">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="qrcode">
+				<img src="https://via.placeholder.com/800" id="qrcodeImage">
+		</div>
+
+		<div class="mui-content list">
+			<div class="mui-row row">
+				<div class="mui-col-sm-5">
+					<div class="desc descGoods">
+						<div class="icon"
+							style="background:url(https://via.placeholder.com/200) no-repeat center;background-size: 110% auto;">
+						</div>
+						<div class="info">
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+						</div>
+						<div class="type">规格：asd</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc sprice">
+						<div class="bg">￥<text>9900.00</text></div>
+					</div>
+				</div>
+				<div class="mui-col-sm-1">
+					<div class="desc number">
+						<div class="bg">
+							x1
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc">
+						<div class="bg">
+							会员优惠 - ¥ 3
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc price">
+						<div class="bg">￥9900.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-row row">
+				<div class="mui-col-sm-5">
+					<div class="desc descGoods">
+						<div class="icon"
+							style="background:url(https://via.placeholder.com/200) no-repeat center;background-size: 110% auto;">
+						</div>
+						<div class="info">
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+						</div>
+						<div class="type">规格：asd</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc sprice">
+						<div class="bg">￥<text>9900.00</text></div>
+					</div>
+				</div>
+				<div class="mui-col-sm-1">
+					<div class="desc number">
+						<div class="bg">
+							x1
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc">
+						<div class="bg">
+							会员优惠 - ¥ 3
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc price">
+						<div class="bg">￥9900.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-row row">
+				<div class="mui-col-sm-5">
+					<div class="desc descGoods">
+						<div class="icon"
+							style="background:url(https://via.placeholder.com/200) no-repeat center;background-size: 110% auto;">
+						</div>
+						<div class="info">
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+						</div>
+						<div class="type">规格：asd</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc sprice">
+						<div class="bg">￥<text>9900.00</text></div>
+					</div>
+				</div>
+				<div class="mui-col-sm-1">
+					<div class="desc number">
+						<div class="bg">
+							x1
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc">
+						<div class="bg">
+							会员优惠 - ¥ 3
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc price">
+						<div class="bg">￥9900.00</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-row row">
+				<div class="mui-col-sm-5">
+					<div class="desc descGoods">
+						<div class="icon"
+							style="background:url(https://via.placeholder.com/200) no-repeat center;background-size: 110% auto;">
+						</div>
+						<div class="info">
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+							哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+						</div>
+						<div class="type">规格：asd</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc sprice">
+						<div class="bg">￥<text>9900.00</text></div>
+					</div>
+				</div>
+				<div class="mui-col-sm-1">
+					<div class="desc number">
+						<div class="bg">
+							x1
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc">
+						<div class="bg">
+							会员优惠 - ¥ 3
+						</div>
+					</div>
+				</div>
+				<div class="mui-col-sm-2">
+					<div class="desc price">
+						<div class="bg">￥9900.00</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+<script src="js/mui.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="static/js/order.js"></script>
+<script type="text/javascript" charset="utf-8">
+	mui.init()
+</script>
+
+</html>

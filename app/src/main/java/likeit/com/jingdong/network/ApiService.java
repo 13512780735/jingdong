@@ -38,14 +38,14 @@ public interface ApiService {
     String Order = APP_HOST + "/order.html";
 
     /**
-     * 首页导航
+     * 登录
      *
      * @return
      */
     @FormUrlEncoded
-    @POST("nativeapp.shop.get_tabbar")
-    Observable<BaseResponse<LoginModel>> Login(@Field("mobile") String mobile,
-                                               @Field("pwd") String pwd
+    @POST("index.php?i=1&c=entry&r=dealer.api.account.login")
+    Observable<BaseResponse<LoginModel>> UserLogin(@Field("username") String mobile,
+                                                   @Field("pwd") String pwd
     );
 
 

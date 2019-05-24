@@ -1,44 +1,61 @@
 package likeit.com.jingdong.web.jsinterface;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
 import likeit.com.jingdong.R;
-import likeit.com.jingdong.network.ApiService;
+import likeit.com.jingdong.listener.OnFinishListener;
+import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
-import likeit.com.jingdong.web.base.BaseFragment;
-import likeit.com.jingdong.web.model.JsInterfaceLogic;
 
-public class FirstFragment extends BaseFragment<JsInterfaceContract.Presenter> implements JsInterfaceContract.View {
+public class FirstFragment extends Fragment {
     MyX5WebView mWebView;
     private String url;
     private com.tencent.smtt.sdk.WebSettings mWebSettings;
     private OpenFileWebChromeClient mOpenFileWebChromeClient;
+    private OnFinishListener listener;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnFinishListener) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_first, container, false);
-
-        url = ApiService.Home;
+        String dealerid = SharedPreferencesUtils.getString(getActivity(), "dealer_id");
+        String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
+        url = "file:///android_asset/jdhome/index.html" + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
         initWebViewSettings();
-        // initUI(view);
         return view;
     }
 
@@ -47,17 +64,8 @@ public class FirstFragment extends BaseFragment<JsInterfaceContract.Presenter> i
         mWebView.loadUrl(url);
     }
 
-//    private void initUI(View view) {
-//        mWebView = view.findViewById(R.id.main_web);
-//        webUrl = ApiService.Home;
-//        Log.e("TAg", webUrl);
-//        mWebView.loadUrl(webUrl);
-//        // initWebViewSettings();
-//    }
-
     private void initWebViewSettings() {
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.addJavascriptInterface(new JsInterfaceLogic(this), "app");
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);    //允许加载javascript
         mWebSettings.setSupportZoom(false);          //允许缩放
@@ -73,10 +81,6 @@ public class FirstFragment extends BaseFragment<JsInterfaceContract.Presenter> i
         // 是否允许通过file url加载的Javascript读取全部资源(包括文件,http,https)，默认值 false
         mWebSettings.setAllowUniversalAccessFromFileURLs(true);
         mOpenFileWebChromeClient = new OpenFileWebChromeClient(getActivity());
-        //mWebView.setWebChromeClient(mOpenFileWebChromeClient);
-
-        // this.getSettingsExtension().setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);//extension
-        // settings 的设计
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -88,34 +92,38 @@ public class FirstFragment extends BaseFragment<JsInterfaceContract.Presenter> i
 
             }
         });
-//        mImgToolbarBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mWebView.goBack();
-//            }
-//        });
-//        mImgToolbarBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mWebView.goBack();
-//            }
-//        });
+        mWebView.addJavascriptInterface(new JSInterface(), "app");
     }
 
-    @Override
-    public void renderUrl(@NonNull String url) {
-        mWebView.loadUrl(url);
-    }
-
-    @Override
-    public void execJavaScript(@NonNull String js) {
-        mWebView.evaluateJavascript(js, new com.tencent.smtt.sdk.ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String s) {
-
+    private final class JSInterface {
+        @SuppressLint("JavascriptInterface")
+        @JavascriptInterface
+        public void openCart(String data) {
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                Log.d("TAG88888", jsonObject.toString());
+                if (listener != null) {
+                    listener.onSuccess(2);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
+        }
+
+        @JavascriptInterface
+        public void OpenGoods(String data) {
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                Log.d("TAG88888", jsonObject.toString());
+                if (listener != null) {
+                    listener.onSuccess(1);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 
     public class OpenFileWebChromeClient extends WebChromeClient {
         public static final int REQUEST_FILE_PICKER = 1;

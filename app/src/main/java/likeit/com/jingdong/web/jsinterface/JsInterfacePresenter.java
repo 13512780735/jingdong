@@ -24,7 +24,7 @@ public class JsInterfacePresenter extends BasePresenter implements JsInterfaceCo
 //            String token = SharedPreferencesUtils.getString(((Fragment) mView).getActivity(), "token");
 //            String openid = SharedPreferencesUtils.getString(((Fragment) mView).getActivity(), "openid");
           //  String webUrl = SharedPreferencesUtils.getString(((Fragment) mView).getActivity(), "webUrl");
-           mView.renderUrl(ApiService.Home);
+           mView.renderUrl("file:///android_asset/jdhome/index.html");
            // XLog.e("url" + webUrl + "&openid=" + openid);
         }
 

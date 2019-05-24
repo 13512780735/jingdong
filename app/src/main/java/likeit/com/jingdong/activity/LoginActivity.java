@@ -1,6 +1,7 @@
 package likeit.com.jingdong.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -19,13 +21,22 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import butterknife.BindView;
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.network.model.BaseResponse;
+import likeit.com.jingdong.network.model.LoginModel;
+import likeit.com.jingdong.network.util.RetrofitUtil;
+import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.BorderTextView;
+import rx.Subscriber;
 
 public class LoginActivity extends BaseActivity {
     @BindView(R.id.iv_bg)
     ImageView iv_bg;
     @BindView(R.id.iv_logo)
     ImageView iv_logo;
+    @BindView(R.id.edphone)
+    EditText edphone;
+    @BindView(R.id.edpwd)
+    EditText edpwd;
     @BindView(R.id.ll_login)
     LinearLayout ll_login;
     private BorderTextView tv_login;
@@ -62,7 +73,7 @@ public class LoginActivity extends BaseActivity {
         ll_login.setLayoutParams(params);
         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) iv_logo.getLayoutParams();
         params1.width = height1 / 4;
-        params1.height = width1 /6;
+        params1.height = width1 / 6;
         iv_logo.setLayoutParams(params1);
         String imgURL = "https://wx.jddengju.com/attachment/images/global/f6WB6e7EFlCLee6elF6HewHXyEuBvl.jpg";
         Glide.with(mContext)
@@ -77,6 +88,34 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 toActivity(MainActivity.class);
                 finish();
+                toLogin();
+            }
+        });
+    }
+
+    private void toLogin() {
+        String mobile = edphone.getText().toString().trim();
+        String pwd = edpwd.getText().toString().trim();
+
+        RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(BaseResponse<LoginModel> baseResponse) {
+                if (baseResponse.code == 200) {
+                    SharedPreferencesUtils.put(mContext, "openid", baseResponse.getData().getOpenid());
+                    SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
+                    SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());
+                    SharedPreferencesUtils.put(mContext, "dealer_id", baseResponse.getData().getDealer_id());
+                }
             }
         });
     }

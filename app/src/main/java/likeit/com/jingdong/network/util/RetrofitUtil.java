@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 import likeit.com.jingdong.BuildConfig;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.network.consts.Consts;
+import likeit.com.jingdong.network.model.BaseResponse;
+import likeit.com.jingdong.network.model.LoginModel;
 import okhttp3.OkHttpClient;
 import okhttp3.internal.platform.Platform;
 import retrofit2.Retrofit;
@@ -75,6 +77,19 @@ public class RetrofitUtil {
             }
         }
         return mInstance;
+    }
+
+    /**
+     * 用于用户登录
+     *
+     * @param subscriber
+     */
+    public void getUsersLogin(String mobile, String pwd, Subscriber<BaseResponse<LoginModel>> subscriber) {
+        mApiService.UserLogin(mobile, pwd)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 
