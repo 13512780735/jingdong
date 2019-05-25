@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.io.File;
 
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.activity.GoodDescActivity;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
@@ -93,6 +94,8 @@ public class SecondFragment extends Fragment {
 //                if (listener != null) {
 //                    listener.onSuccess(1);
 //                }
+                Intent intent = new Intent(getActivity(), GoodDescActivity.class);
+                startActivity(intent);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

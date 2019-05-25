@@ -86,8 +86,6 @@ public class LoginActivity extends BaseActivity {
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toActivity(MainActivity.class);
-                finish();
                 toLogin();
             }
         });
@@ -97,7 +95,8 @@ public class LoginActivity extends BaseActivity {
         String mobile = edphone.getText().toString().trim();
         String pwd = edpwd.getText().toString().trim();
 
-        RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
+        RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
+      //  RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
             @Override
             public void onCompleted() {
 
@@ -115,6 +114,8 @@ public class LoginActivity extends BaseActivity {
                     SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
                     SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());
                     SharedPreferencesUtils.put(mContext, "dealer_id", baseResponse.getData().getDealer_id());
+                    toActivity(MainActivity.class);
+                    finish();
                 }
             }
         });

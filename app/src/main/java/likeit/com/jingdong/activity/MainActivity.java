@@ -1,5 +1,6 @@
 package likeit.com.jingdong.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -56,6 +57,7 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 drawerLayout.closeDrawers();
                 switch (group.getCheckedRadioButtonId()) {
+
                     case R.id.tv_option1:
                         animateNavigation(option_1);
                         fragment = new FirstFragment();
@@ -119,5 +121,15 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
             mRadioGroup.clearCheck();
             option_3.setChecked(true);
         }
+    }
+
+    @Override
+    public void onBackPressed() {//重写的Activity返回
+
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.MAIN");
+        intent.addCategory("android.intent.category.HOME");
+        startActivity(intent);
+
     }
 }

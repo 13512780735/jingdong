@@ -85,7 +85,7 @@ public class ThirdFragment extends Fragment {
     private final class JSInterface {
         @SuppressLint("JavascriptInterface")
         @JavascriptInterface
-        public void openCart(String data) {
+        public void OpenOrder(String data) {
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 Log.d("TAG88888", jsonObject.toString());
