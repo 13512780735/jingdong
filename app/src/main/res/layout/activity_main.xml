@@ -18,8 +18,7 @@
         android:id="@+id/ll_drawer_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/width60"
-        android:layout_marginTop="@dimen/width60"
+
         android:background="@color/white"
         android:orientation="vertical"
         app:drawerItem="true"
@@ -28,7 +27,9 @@
         <RadioGroup
             android:id="@+id/mRadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/width60"
+            android:layout_marginTop="@dimen/width60">
 
             <RadioButton
                 android:id="@+id/tv_option1"
@@ -38,54 +39,56 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:checked="true"
-                android:textSize="@dimen/txt_18"
                 android:drawableLeft="@drawable/icon_home_selector"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center"
                 android:text="首页"
-                android:textColor="@drawable/textcolor_selector" />
+                android:layout_marginTop="@dimen/dp_40"
+                android:textColor="@drawable/textcolor_selector"
+                android:textSize="@dimen/txt_18" />
 
-            <RadioButton
-                android:id="@+id/tv_option2"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:button="@null"
-                android:textSize="@dimen/txt_18"
-                android:drawableLeft="@drawable/icon_shop_selector"
-                android:drawablePadding="@dimen/dp_10"
-                android:gravity="center"
-                android:text="全部商品"
-                android:textColor="@drawable/textcolor_selector" />
+            <!--   <RadioButton
+                   android:id="@+id/tv_option2"
+                   android:layout_width="wrap_content"
+                   android:layout_height="0dp"
+                   android:layout_gravity="center"
+                   android:layout_weight="1"
+                   android:button="@null"
+                   android:textSize="@dimen/txt_18"
+                   android:drawableLeft="@drawable/icon_shop_selector"
+                   android:drawablePadding="@dimen/dp_10"
+                   android:gravity="center"
+                   android:text="全部商品"
+                   android:textColor="@drawable/textcolor_selector" />
 
-            <RadioButton
-                android:id="@+id/tv_option3"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:textSize="@dimen/txt_18"
-                android:button="@null"
-                android:drawableLeft="@drawable/icon_cart_selector"
-                android:drawablePadding="@dimen/dp_10"
-                android:gravity="center"
-                android:text="购物车"
-                android:textColor="@drawable/textcolor_selector" />
-
+               <RadioButton
+                   android:id="@+id/tv_option3"
+                   android:layout_width="wrap_content"
+                   android:layout_height="0dp"
+                   android:layout_gravity="center"
+                   android:layout_weight="1"
+                   android:textSize="@dimen/txt_18"
+                   android:button="@null"
+                   android:drawableLeft="@drawable/icon_cart_selector"
+                   android:drawablePadding="@dimen/dp_10"
+                   android:gravity="center"
+                   android:text="购物车"
+                   android:textColor="@drawable/textcolor_selector" />
+   -->
             <RadioButton
                 android:id="@+id/tv_option4"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:textSize="@dimen/txt_18"
                 android:button="@null"
+                android:layout_marginTop="@dimen/dp_40"
                 android:drawableLeft="@drawable/icon_set_selector"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center"
-                android:text="管理"
-                android:textColor="@drawable/textcolor_selector" />
+                android:text="设置"
+                android:textColor="@drawable/textcolor_selector"
+                android:textSize="@dimen/txt_18" />
         </RadioGroup>
     </LinearLayout>
 

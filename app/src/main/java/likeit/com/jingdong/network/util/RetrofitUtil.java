@@ -10,6 +10,7 @@ import likeit.com.jingdong.BuildConfig;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.network.consts.Consts;
 import likeit.com.jingdong.network.model.BaseResponse;
+import likeit.com.jingdong.network.model.CodeModel;
 import likeit.com.jingdong.network.model.LoginModel;
 import okhttp3.OkHttpClient;
 import okhttp3.internal.platform.Platform;
@@ -86,6 +87,13 @@ public class RetrofitUtil {
      */
     public void getUsersLogin(String mobile, String pwd, Subscriber<BaseResponse<LoginModel>> subscriber) {
         mApiService.UserLogin(mobile, pwd)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+    public void getCode(String openid, String dealerid, Subscriber<BaseResponse<CodeModel>> subscriber) {
+        mApiService.getCode(openid, dealerid)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

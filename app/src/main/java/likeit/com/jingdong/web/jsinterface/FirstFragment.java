@@ -17,7 +17,13 @@ import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +31,10 @@ import org.json.JSONObject;
 import java.io.File;
 
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.fragment.dialogCodeFragment;
+import likeit.com.jingdong.fragment.dialogFragment;
 import likeit.com.jingdong.listener.OnFinishListener;
+import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
 
@@ -35,6 +44,8 @@ public class FirstFragment extends Fragment {
     private com.tencent.smtt.sdk.WebSettings mWebSettings;
     private OpenFileWebChromeClient mOpenFileWebChromeClient;
     private OnFinishListener listener;
+    private ImageView tvRight;
+    private dialogCodeFragment dialog;
 
 
     @Override
@@ -53,7 +64,7 @@ public class FirstFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         String dealerid = SharedPreferencesUtils.getString(getActivity(), "dealer_id");
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
-        url = "file:///android_asset/jdhome/index.html" + "?dealerid=" + dealerid + "&openid=" + openid;
+        url = ApiService.Home + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
         initWebViewSettings();
         return view;
@@ -61,7 +72,21 @@ public class FirstFragment extends Fragment {
 
     private void initUI(View view) {
         mWebView = view.findViewById(R.id.main_web);
+        tvRight = view.findViewById(R.id.tv_right);
+        Glide.with(getActivity())
+                .load(R.mipmap.ic_code)
+                .animate(R.anim.item_alpha_in)
+                .priority(Priority.HIGH)
+                .into(tvRight);
         mWebView.loadUrl(url);
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new dialogCodeFragment(getContext());
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
+            }
+        });
     }
 
     private void initWebViewSettings() {
@@ -99,28 +124,28 @@ public class FirstFragment extends Fragment {
         @SuppressLint("JavascriptInterface")
         @JavascriptInterface
         public void openCart(String data) {
-            try {
-                JSONObject jsonObject = new JSONObject(data);
-                Log.d("TAG88888", jsonObject.toString());
-                if (listener != null) {
-                    listener.onSuccess(2);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                JSONObject jsonObject = new JSONObject(data);
+//                Log.d("TAG88888", jsonObject.toString());
+//                if (listener != null) {
+//                    listener.onSuccess(2);
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
         }
 
         @JavascriptInterface
         public void OpenGoods(String data) {
-            try {
-                JSONObject jsonObject = new JSONObject(data);
-                Log.d("TAG88888", jsonObject.toString());
-                if (listener != null) {
-                    listener.onSuccess(1);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                JSONObject jsonObject = new JSONObject(data);
+//                Log.d("TAG88888", jsonObject.toString());
+//                if (listener != null) {
+//                    listener.onSuccess(1);
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 

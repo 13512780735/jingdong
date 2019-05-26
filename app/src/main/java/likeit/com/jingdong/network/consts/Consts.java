@@ -11,9 +11,11 @@ package likeit.com.jingdong.network.consts;
 
 public final class Consts {
 
-     public final static String APP_HOST = "https://wx.jddengju.com/app/"; //正式环境
-     //public final static String APP_HOST_web = "https://wx.aqe365.com/"; //正式环境
+    public final static String APP_HOST = "https://wx.jddengju.com/app/"; //正式网络环境
+    public final static String HOST = "http://jdjiazhuang.maimaitoo.com/jdhome/"; //正式环境
+    // public final static String HOST = "file:///android_asset/jdhome/"; //本地环境
 
+    //public final static String APP_HOST_web = "https://wx.aqe365.com/"; //正式环境
 
 
 }

@@ -1,16 +1,21 @@
 package likeit.com.jingdong.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import butterknife.BindView;
 import likeit.com.jingdong.R;
 
 public class WelcomeActivity extends BaseActivity {
+    @BindView(R.id.iv_splash)
+    ImageView ivSplash;
     private Animation animation;
     private View view;
 
@@ -23,6 +28,8 @@ public class WelcomeActivity extends BaseActivity {
         view = View.inflate(this, R.layout.activity_welcome, null);
         setContentView(view);
         animation = AnimationUtils.loadAnimation(this, R.anim.splash_alpha);
+        Glide.with(mContext)
+                .load(R.mipmap.start).asBitmap().into(ivSplash);
         initUI();
     }
 

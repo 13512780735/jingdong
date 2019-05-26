@@ -42,7 +42,7 @@ public class SecondFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         String dealerid = SharedPreferencesUtils.getString(getActivity(), "dealer_id");
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
-        url = "file:///android_asset/jdhome/goods.html" + "?dealerid=" + dealerid + "&openid=" + openid;
+        url = ApiService.Good + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
         initWebViewSettings();
         return view;

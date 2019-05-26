@@ -20,6 +20,7 @@ import java.io.File;
 
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.fragment.SecondFragment;
+import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
 import likeit.com.jingdong.web.jsinterface.FirstFragment;
@@ -38,7 +39,7 @@ public class GoodDescActivity extends BaseActivity {
         setContentView(R.layout.activity_good_desc);
         String dealerid = SharedPreferencesUtils.getString(mContext, "dealer_id");
         String openid = SharedPreferencesUtils.getString(mContext, "openid");
-        url = "file:///android_asset/jdhome/desc.html" + "?dealerid=" + dealerid + "&openid=" + openid;
+        url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI();
         initWebViewSettings();
 

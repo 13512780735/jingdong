@@ -44,12 +44,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            //透明状态栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            //透明导航栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-//        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
@@ -75,9 +69,9 @@ public class LoginActivity extends BaseActivity {
         params1.width = height1 / 4;
         params1.height = width1 / 6;
         iv_logo.setLayoutParams(params1);
-        String imgURL = "https://wx.jddengju.com/attachment/images/global/f6WB6e7EFlCLee6elF6HewHXyEuBvl.jpg";
+       // String imgURL = "https://wx.jddengju.com/attachment/images/global/f6WB6e7EFlCLee6elF6HewHXyEuBvl.jpg";
         Glide.with(mContext)
-                .load(imgURL)
+                .load(R.mipmap.login_bg)
                 .animate(R.anim.item_alpha_in)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true)
@@ -93,10 +87,10 @@ public class LoginActivity extends BaseActivity {
 
     private void toLogin() {
         String mobile = edphone.getText().toString().trim();
-        String pwd = edpwd.getText().toString().trim();
+        final String pwd = edpwd.getText().toString().trim();
 
         RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
-      //  RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
+            //   RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
             @Override
             public void onCompleted() {
 
@@ -110,6 +104,8 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onNext(BaseResponse<LoginModel> baseResponse) {
                 if (baseResponse.code == 200) {
+
+                    SharedPreferencesUtils.put(mContext, "pwd", pwd);
                     SharedPreferencesUtils.put(mContext, "openid", baseResponse.getData().getOpenid());
                     SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
                     SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());

@@ -40,7 +40,7 @@ public class ThirdFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_third, container, false);
         String dealerid = SharedPreferencesUtils.getString(getActivity(), "dealer_id");
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
-        url = "file:///android_asset/jdhome/cart.html" + "?dealerid=" + dealerid + "&openid=" + openid;
+        url = ApiService.Cart + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
         initWebViewSettings();
         return view;

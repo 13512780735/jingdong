@@ -22,7 +22,7 @@ import likeit.com.jingdong.fragment.FourthFragment;
 import likeit.com.jingdong.fragment.SecondFragment;
 import likeit.com.jingdong.fragment.ThirdFragment;
 
-public class MainActivity extends BaseActivity implements OnFinishListener {
+public class MainActivity extends BaseActivity  {
     private View navigation;
     private RadioButton option_1, option_2, option_3, option_4;
     private SimpleDrawerLayout drawerLayout;
@@ -43,8 +43,8 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
 
     private void initUI() {
         option_1 = findViewById(R.id.tv_option1);
-        option_2 = findViewById(R.id.tv_option2);
-        option_3 = findViewById(R.id.tv_option3);
+//        option_2 = findViewById(R.id.tv_option2);
+//        option_3 = findViewById(R.id.tv_option3);
         option_4 = findViewById(R.id.tv_option4);
         mRadioGroup = findViewById(R.id.mRadioGroup);
         drawerLayout = findViewById(R.id.simple_drawer_layout);
@@ -52,6 +52,8 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
         navigation = option_1;
         fragment = new FirstFragment();
         fragmentManager.beginTransaction().add(R.id.fl_content_main, fragment).commit();
+//        mRadioGroup.clearCheck();
+//        option_1.setChecked(true);
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -64,20 +66,20 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
                         MainActivity.restoreFragment = fragment;
                         fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
                         break;
-                    case R.id.tv_option2:
-                        animateNavigation(option_2);
-                        // drawerLayout.closeDrawers();
-                        fragment = new SecondFragment();
-                        MainActivity.restoreFragment = fragment;
-                        fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
-                        break;
-                    case R.id.tv_option3:
-                        animateNavigation(option_3);
-                        // drawerLayout.closeDrawers();
-                        fragment = new ThirdFragment();
-                        MainActivity.restoreFragment = fragment;
-                        fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
-                        break;
+//                    case R.id.tv_option2:
+//                        animateNavigation(option_2);
+//                        // drawerLayout.closeDrawers();
+//                        fragment = new SecondFragment();
+//                        MainActivity.restoreFragment = fragment;
+//                        fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
+//                        break;
+//                    case R.id.tv_option3:
+//                        animateNavigation(option_3);
+//                        // drawerLayout.closeDrawers();
+//                        fragment = new ThirdFragment();
+//                        MainActivity.restoreFragment = fragment;
+//                        fragmentManager.beginTransaction().replace(R.id.fl_content_main, fragment).commit();
+//                        break;
                     case R.id.tv_option4:
                         animateNavigation(option_4);
                         //drawerLayout.closeDrawers();
@@ -111,17 +113,17 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public void onSuccess(int position) {
-        if (position == 2) {
-            mRadioGroup.clearCheck();
-            option_3.setChecked(true);
-        } else if (position == 1) {
-            mRadioGroup.clearCheck();
-            option_3.setChecked(true);
-        }
-    }
+//
+//    @Override
+//    public void onSuccess(int position) {
+//        if (position == 2) {
+//            mRadioGroup.clearCheck();
+//            option_3.setChecked(true);
+//        } else if (position == 1) {
+//            mRadioGroup.clearCheck();
+//            option_2.setChecked(true);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {//重写的Activity返回
