@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FC3E51</color>
+    <color name="colorPrimary">#E2231A</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FC3E51</color>
-    <color name="toolbar_bg">#FC3E51</color>
+    <color name="colorAccent">#E2231A</color>
+    <color name="toolbar_bg">#E2231A</color>
     <!--主题背景色-->
     <color name="defualt_window_background">#F7F7F7</color>
     <color name="white">#ffffff</color>

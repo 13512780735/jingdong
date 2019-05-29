@@ -8,33 +8,48 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.fragment.dialogCodeFragment;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.view.BorderRelativeLayout;
+import likeit.com.jingdong.view.BorderTextView;
 import likeit.com.jingdong.view.MyX5WebView;
 import likeit.com.jingdong.fragment.FirstFragment;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
 
 public class GoodDescActivity extends BaseActivity {
-
+    BorderRelativeLayout rlBack;
+    private ImageView tvRight;
     MyX5WebView mWebView;
     private String url;
     private com.tencent.smtt.sdk.WebSettings mWebSettings;
     private OpenFileWebChromeClient mOpenFileWebChromeClient;
+    private dialogCodeFragment dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_good_desc);
         String dealerid = SharedPreferencesUtils.getString(mContext, "dealer_id");
         String openid = SharedPreferencesUtils.getString(mContext, "openid");
@@ -45,8 +60,23 @@ public class GoodDescActivity extends BaseActivity {
     }
 
     private void initUI() {
+        tvRight = findViewById(R.id.rl_back);
         mWebView = findViewById(R.id.main_web);
         mWebView.loadUrl(url);
+        tvRight = findViewById(R.id.tv_right);
+        Glide.with(this)
+                .load(R.mipmap.ic_code)
+                .animate(R.anim.item_alpha_in)
+                .priority(Priority.HIGH)
+                .into(tvRight);
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new dialogCodeFragment(getApplicationContext());
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
+            }
+        });
     }
 
     private void initWebViewSettings() {
@@ -197,6 +227,15 @@ public class GoodDescActivity extends BaseActivity {
 
             mOpenFileWebChromeClient.mFilePathCallback = null;
             mOpenFileWebChromeClient.mFilePathCallbacks = null;
+        }
+    }
+
+    @OnClick({R.id.rl_back})
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_back:
+                finish();
+                break;
         }
     }
 }

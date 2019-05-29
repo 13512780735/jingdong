@@ -18,17 +18,34 @@
         android:maxLines="1"
         android:text="京东家装 | 灯聚超市"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/txt_24" />
+        android:textSize="@dimen/txt_28"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/tv_right"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_22" />
+
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/tv_right"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginRight="10px"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="10px"
+        android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/txt_16"
-        android:gravity="center" />
+        android:textSize="@dimen/txt_16" />
 
 </RelativeLayout>

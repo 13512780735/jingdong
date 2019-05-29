@@ -3,14 +3,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".activity.GoodDescActivity">
 
-    <include layout="@layout/view_feed_toolbar_back"></include>
+    <include layout="@layout/view_feed_toolbar"></include>
 
-    <likeit.com.jingdong.view.MyX5WebView
-        android:id="@+id/main_web"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <likeit.com.jingdong.view.MyX5WebView
+            android:id="@+id/main_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+
+            <likeit.com.jingdong.view.BorderRelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="@dimen/width80"
+                android:layout_height="@dimen/width80"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dp_10"
+                app:contentBackColor="#999999"
+                app:cornerRadius="40dp"
+                app:strokeColor01="#999999"
+                app:strokeWidth01="1dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_back_1" />
+            </likeit.com.jingdong.view.BorderRelativeLayout>
+        </RelativeLayout>
+
+    </FrameLayout>
 </LinearLayout>

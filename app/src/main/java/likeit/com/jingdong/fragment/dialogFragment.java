@@ -40,14 +40,15 @@ public class dialogFragment extends DialogFragment {
     EditText edpwd;
     LinearLayout ll_bg;
     private OnLoginInforCompleted mOnLoginInforCompleted;
-    private TextView tv_confirm,tv_cancle;
+    private TextView tv_confirm, tv_cancle;
 
     public void setOnLoginInforCompleted(OnLoginInforCompleted onLoginInforCompleted) {
         mOnLoginInforCompleted = onLoginInforCompleted;
     }
+
     private DialogInterface.OnDismissListener mOnClickListener;
 
-//    public void setOnDismissListener(DialogInterface.OnDismissListener listener){
+    //    public void setOnDismissListener(DialogInterface.OnDismissListener listener){
 //        this.mOnClickListener = listener;
 //    }
 //
@@ -68,13 +69,11 @@ public class dialogFragment extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().setCanceledOnTouchOutside(false);
         View view = inflater.inflate(R.layout.fragment_dialog, container, false);
-
-        ButterKnife.bind(getActivity());
         initUI(view);
-
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return view;
     }
+
     private OnFinishListener listener;
 
     @Override
@@ -98,7 +97,7 @@ public class dialogFragment extends DialogFragment {
             public void onClick(View v) {
                 getDialog().dismiss();
                 listener.onSuccess(1);
-             // mOnLoginInforCompleted.inputLoginInforCompleted("2");
+                // mOnLoginInforCompleted.inputLoginInforCompleted("2");
             }
         });
         tv_confirm.setOnClickListener(new View.OnClickListener() {
@@ -109,8 +108,8 @@ public class dialogFragment extends DialogFragment {
 //                dismiss();
                 String pwd1 = edpwd.getText().toString();
                 pwd = SharedPreferencesUtils.getString(getActivity(), "pwd");
-                Log.d("TAG", "555->"+pwd1);
-                Log.d("TAG1", "888->"+pwd);
+                Log.d("TAG", "555->" + pwd1);
+                Log.d("TAG1", "888->" + pwd);
                 if (!pwd1.equals(pwd)) {
                     Toast.makeText(getActivity(), "密码不正确，请重新输入！", Toast.LENGTH_LONG);
                     edpwd.setText("");
@@ -128,16 +127,16 @@ public class dialogFragment extends DialogFragment {
         });
 
 
-//        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-//
-//        int width1 = wm.getDefaultDisplay().getWidth();
-//        int height1 = wm.getDefaultDisplay().getHeight();
-//
-//        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_bg.getLayoutParams();
-//
-//        params.width = height1 / 3;
-//        params.height = width1 / 7;
-//        ll_bg.setLayoutParams(params);
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+
+        int width1 = wm.getDefaultDisplay().getWidth();
+        int height1 = wm.getDefaultDisplay().getHeight();
+
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_bg.getLayoutParams();
+
+        params.width = height1 / 3;
+        params.height = width1 / 7;
+        ll_bg.setLayoutParams(params);
     }
 
 }

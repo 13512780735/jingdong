@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +9,109 @@
 
     <include layout="@layout/view_feed_toolbar"></include>
 
-<!--    <likeit.com.jingdong.view.MyX5WebView
-        android:id="@+id/main_web"
+    <!--    <likeit.com.jingdong.view.MyX5WebView
+            android:id="@+id/main_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>-->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>-->
-    <WebView
-        android:id="@+id/main_web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+          <likeit.com.jingdong.view.MyX5WebView
+                   android:id="@+id/main_web"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
+   <!--     <WebView
+            android:id="@+id/main_web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:orientation="vertical">
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_search"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    android:layout_margin="@dimen/dp_10"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_search" />
+
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_cart"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    app:contentBackColor="#999999"
+                    android:layout_margin="@dimen/dp_10"
+                    app:cornerRadius="40dp"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_cart" />
+
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_shop"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    android:layout_margin="@dimen/dp_10"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_shop" />
+
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_top"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    android:layout_margin="@dimen/dp_10"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_top" />
+
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+
 </LinearLayout>

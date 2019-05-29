@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/ll_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_search_round__white_10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <likeit.com.jingdong.view.BorderRelativeLayout
+            android:id="@+id/rl_del"
+            android:layout_width="@dimen/width30"
+            android:layout_height="@dimen/width30"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/width20"
+            app:contentBackColor="#999999"
+            app:cornerRadius="15dp"
+            app:strokeColor01="#999999"
+            app:strokeWidth01="1dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_del" />
+
+        </likeit.com.jingdong.view.BorderRelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/width20"
+            android:text="搜 索"
+            android:textSize="@dimen/txt_28" />
+
+        <likeit.com.jingdong.view.BorderRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/dp_10"
+            app:contentBackColor="@color/white"
+            app:cornerRadius="@dimen/dp_5"
+            app:strokeColor01="#999999"
+            app:strokeWidth01="1dp">
+
+            <EditText
+                android:id="@+id/ed_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="请输入您要搜索的商品名称"
+                android:inputType="textPassword"
+                android:padding="@dimen/dp_5"
+                android:textSize="@dimen/txt_24" />
+        </likeit.com.jingdong.view.BorderRelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width20"
+            android:background="@drawable/shape_search_round_red_15"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="搜 索"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_24" />
+    </LinearLayout>
+</RelativeLayout>

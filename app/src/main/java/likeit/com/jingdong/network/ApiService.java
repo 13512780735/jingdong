@@ -49,10 +49,15 @@ public interface ApiService {
     Observable<BaseResponse<LoginModel>> UserLogin(@Field("username") String mobile,
                                                    @Field("pwd") String pwd
     );
-
+//获取二维码
     @FormUrlEncoded
     @POST("index.php?i=1&c=entry&r=dealer.api.account.manage")
     Observable<BaseResponse<CodeModel>> getCode(@Field("openid") String openid,
+                                                @Field("dealerid") String dealerid
+    );
+    @FormUrlEncoded
+    @POST("index.php?i=1&c=entry&r=dealer.api.category.categorylist")
+    Observable<BaseResponse<CodeModel>> getGoodsList(@Field("openid") String openid,
                                                 @Field("dealerid") String dealerid
     );
 

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,24 +24,32 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.activity.GoodDescActivity;
+import likeit.com.jingdong.activity.GoodsListActivity;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.view.BorderRelativeLayout;
+import likeit.com.jingdong.view.MyX5WebView;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
 
-public class FirstFragment extends Fragment {
-    //    MyX5WebView mWebView;
-//    private com.tencent.smtt.sdk.WebSettings mWebSettings;
-    WebView mWebView;
-    private WebSettings mWebSettings;
+public class FirstFragment extends Fragment implements View.OnClickListener {
+    MyX5WebView mWebView;
+    private com.tencent.smtt.sdk.WebSettings mWebSettings;
+    //    WebView mWebView;
+//    private WebSettings mWebSettings;
     private String url;
     private OpenFileWebChromeClient mOpenFileWebChromeClient;
     private OnFinishListener listener;
     private ImageView tvRight;
     private dialogCodeFragment dialog;
+    private BorderRelativeLayout rlSearch, rlCart, rlShop, rlTop;
 
 
     @Override
@@ -67,6 +76,10 @@ public class FirstFragment extends Fragment {
 
     private void initUI(View view) {
         mWebView = view.findViewById(R.id.main_web);
+        rlSearch = view.findViewById(R.id.rl_search);
+        rlCart = view.findViewById(R.id.rl_cart);
+        rlShop = view.findViewById(R.id.rl_shop);
+        rlTop = view.findViewById(R.id.rl_top);
         tvRight = view.findViewById(R.id.tv_right);
         Glide.with(getActivity())
                 .load(R.mipmap.ic_code)
@@ -82,6 +95,10 @@ public class FirstFragment extends Fragment {
                 dialog.show();
             }
         });
+        rlSearch.setOnClickListener(this);
+        rlCart.setOnClickListener(this);
+        rlTop.setOnClickListener(this);
+        rlShop.setOnClickListener(this);
     }
 
     private void initWebViewSettings() {
@@ -115,6 +132,28 @@ public class FirstFragment extends Fragment {
         mWebView.addJavascriptInterface(new JSInterface(), "app");
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.rl_search:
+                showSearchDialog();
+                break;
+            case R.id.rl_cart:
+                break;
+            case R.id.rl_shop:
+                Intent intent = new Intent(getActivity(), GoodsListActivity.class);
+                getActivity().startActivity(intent);
+                break;
+            case R.id.rl_top:
+                break;
+        }
+    }
+
+    private void showSearchDialog() {
+        SearchDialogFragment dialogFragment = new SearchDialogFragment();
+        dialogFragment.show(getFragmentManager(), "dialogFragment");
+    }
+
     private final class JSInterface {
         @SuppressLint("JavascriptInterface")
         @JavascriptInterface
@@ -128,6 +167,21 @@ public class FirstFragment extends Fragment {
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
+        }
+
+        @JavascriptInterface
+        public void OpenDesc(String data) {
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                Intent intent = new Intent(getActivity(), GoodDescActivity.class);
+                getActivity().startActivity(intent);
+                Log.d("TAG88888", jsonObject.toString());
+//                if (listener != null) {
+//                    listener.onSuccess(1);
+//                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         @JavascriptInterface

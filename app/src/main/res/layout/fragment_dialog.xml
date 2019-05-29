@@ -9,11 +9,12 @@
     <LinearLayout
         android:id="@+id/ll_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="@dimen/width40"
         android:background="@drawable/shape_search_round__white_10"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:gravity="center"
         android:orientation="vertical">
 
 
@@ -24,12 +25,13 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/dp_10"
             android:text="请输入登录密码"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_24" />
 
 
         <likeit.com.jingdong.view.BorderRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_margin="@dimen/dp_10"
             app:contentBackColor="@color/white"
             app:cornerRadius="@dimen/dp_5"
@@ -44,7 +46,8 @@
                 android:background="@null"
                 android:hint="请输入登录密码"
                 android:inputType="textPassword"
-                android:padding="@dimen/dp_5" />
+                android:padding="@dimen/dp_5"
+                android:textSize="@dimen/txt_24" />
         </likeit.com.jingdong.view.BorderRelativeLayout>
 
         <LinearLayout
@@ -62,8 +65,8 @@
                 android:gravity="center"
                 android:padding="@dimen/dp_5"
                 android:text="取消"
-
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_24" />
 
             <TextView
                 android:id="@+id/tv_confirm"
@@ -75,7 +78,8 @@
                 android:gravity="center"
                 android:padding="@dimen/dp_5"
                 android:text="确定"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_24" />
 
 
         </LinearLayout>
