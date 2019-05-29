@@ -26,7 +26,6 @@ import likeit.com.jingdong.activity.GoodDescActivity;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
-import likeit.com.jingdong.web.jsinterface.FirstFragment;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
 
 public class SecondFragment extends Fragment {

@@ -86,11 +86,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void toLogin() {
-        String mobile = edphone.getText().toString().trim();
+        final String mobile = edphone.getText().toString().trim();
         final String pwd = edpwd.getText().toString().trim();
 
-        RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
-            //   RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
+         RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
+          //   RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
             @Override
             public void onCompleted() {
 
@@ -106,6 +106,7 @@ public class LoginActivity extends BaseActivity {
                 if (baseResponse.code == 200) {
 
                     SharedPreferencesUtils.put(mContext, "pwd", pwd);
+                    SharedPreferencesUtils.put(mContext, "phone", mobile);
                     SharedPreferencesUtils.put(mContext, "openid", baseResponse.getData().getOpenid());
                     SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
                     SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());

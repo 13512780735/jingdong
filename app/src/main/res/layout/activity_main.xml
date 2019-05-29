@@ -43,9 +43,9 @@
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center"
                 android:text="首页"
-                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginTop="@dimen/width100"
                 android:textColor="@drawable/textcolor_selector"
-                android:textSize="@dimen/txt_18" />
+                android:textSize="40sp" />
 
             <!--   <RadioButton
                    android:id="@+id/tv_option2"
@@ -82,13 +82,13 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:button="@null"
-                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginTop="@dimen/width100"
                 android:drawableLeft="@drawable/icon_set_selector"
                 android:drawablePadding="@dimen/dp_10"
                 android:gravity="center"
                 android:text="设置"
                 android:textColor="@drawable/textcolor_selector"
-                android:textSize="@dimen/txt_18" />
+                android:textSize="40sp" />
         </RadioGroup>
     </LinearLayout>
 

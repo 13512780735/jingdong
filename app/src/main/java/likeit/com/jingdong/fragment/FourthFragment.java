@@ -19,12 +19,14 @@ import com.tencent.bugly.beta.Beta;
 
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.activity.LoginActivity;
+import likeit.com.jingdong.listener.OnFinishListener;
+import likeit.com.jingdong.listener.OnLoginInforCompleted;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.BorderTextView;
 import likeit.com.jingdong.view.MyX5WebView;
 
-public class FourthFragment extends Fragment implements dialogFragment.OnDeptCallBack {
+public class FourthFragment extends Fragment implements OnLoginInforCompleted {
     MyX5WebView mWebView;
     private String webUrl;
     private LinearLayout ll_bg;
@@ -40,19 +42,23 @@ public class FourthFragment extends Fragment implements dialogFragment.OnDeptCal
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_fourth, container, false);
         ll_bg = view.findViewById(R.id.ll_bg);
-        ll_bg.setVisibility(View.GONE);
-        dialogShow();
 
+        dialogShow();
+        initUI(view);
         return view;
     }
 
     private void dialogShow() {
-        dialog = new dialogFragment(getContext());
-        dialog.show();
+
+        ll_bg.setVisibility(View.GONE);
+        dialogFragment dialog = new dialogFragment();
+        dialog.setOnLoginInforCompleted(this);
+        dialog.show(this.getFragmentManager(), "dialogFragment");
     }
 
     private void initUI(View view) {
-
+        // dialog.dismiss();
+        // ll_bg.setVisibility(View.VISIBLE);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
 
         int width1 = wm.getDefaultDisplay().getWidth();
@@ -60,7 +66,8 @@ public class FourthFragment extends Fragment implements dialogFragment.OnDeptCal
 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ll_bg.getLayoutParams();
 
-        params.width = height1 / 3;
+        params.height = height1 / 3;
+        params.width = height1 / 2;
         ll_bg.setLayoutParams(params);
         tv_logout = view.findViewById(R.id.tv_logout);
         versionTv = view.findViewById(R.id.version_tv);
@@ -76,6 +83,7 @@ public class FourthFragment extends Fragment implements dialogFragment.OnDeptCal
             @Override
             public void onClick(View v) {
                 SharedPreferencesUtils.put(getActivity(), "pwd", "");
+                SharedPreferencesUtils.put(getActivity(), "phone", "");
                 SharedPreferencesUtils.put(getActivity(), "openid", "");
                 SharedPreferencesUtils.put(getActivity(), "expire", "");
                 SharedPreferencesUtils.put(getActivity(), "token", "");
@@ -84,6 +92,18 @@ public class FourthFragment extends Fragment implements dialogFragment.OnDeptCal
                 getActivity().startActivity(intent);
             }
         });
+    }
+
+    private OnFinishListener listener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener = (OnFinishListener) context;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getVersion() {
@@ -98,8 +118,16 @@ public class FourthFragment extends Fragment implements dialogFragment.OnDeptCal
     }
 
     @Override
-    public void onCallBack(String st) {
-        ll_bg.setVisibility(View.VISIBLE);
-        initUI(view);
+    public void inputLoginInforCompleted(String userName) {
+        Log.d("TAG", "点击了23");
+        if ("1".equals(userName)) {
+            ll_bg.setVisibility(View.VISIBLE);
+        } else {
+            listener.onSuccess(1);
+          //  dialog.dismiss();
+            if(dialog!=null){
+                dialog.dismiss();
+            }
+        }
     }
 }

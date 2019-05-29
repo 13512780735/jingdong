@@ -4,13 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".web.jsinterface.FirstFragment">
+    tools:context=".fragment.FirstFragment">
 
     <include layout="@layout/view_feed_toolbar"></include>
 
-    <likeit.com.jingdong.view.MyX5WebView
+<!--    <likeit.com.jingdong.view.MyX5WebView
         android:id="@+id/main_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
-
+        android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>-->
+    <WebView
+        android:id="@+id/main_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
 </LinearLayout>

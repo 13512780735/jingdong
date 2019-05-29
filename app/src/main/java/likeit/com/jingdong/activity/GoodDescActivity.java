@@ -19,11 +19,10 @@ import org.json.JSONObject;
 import java.io.File;
 
 import likeit.com.jingdong.R;
-import likeit.com.jingdong.fragment.SecondFragment;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.view.MyX5WebView;
-import likeit.com.jingdong.web.jsinterface.FirstFragment;
+import likeit.com.jingdong.fragment.FirstFragment;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
 
 public class GoodDescActivity extends BaseActivity {

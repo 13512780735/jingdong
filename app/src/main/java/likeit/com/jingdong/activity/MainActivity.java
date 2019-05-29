@@ -11,18 +11,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.creativesource.simpledrawerlayout.SimpleDrawerLayout;
 
 import likeit.com.jingdong.R;
-import likeit.com.jingdong.listener.OnFinishListener;
-import likeit.com.jingdong.web.jsinterface.FirstFragment;
+import likeit.com.jingdong.fragment.FirstFragment;
 import likeit.com.jingdong.fragment.FourthFragment;
-import likeit.com.jingdong.fragment.SecondFragment;
-import likeit.com.jingdong.fragment.ThirdFragment;
+import likeit.com.jingdong.listener.OnFinishListener;
 
-public class MainActivity extends BaseActivity  {
+public class MainActivity extends BaseActivity implements OnFinishListener {
     private View navigation;
     private RadioButton option_1, option_2, option_3, option_4;
     private SimpleDrawerLayout drawerLayout;
@@ -113,25 +110,23 @@ public class MainActivity extends BaseActivity  {
         }
         return super.onOptionsItemSelected(item);
     }
-//
-//    @Override
-//    public void onSuccess(int position) {
-//        if (position == 2) {
-//            mRadioGroup.clearCheck();
-//            option_3.setChecked(true);
-//        } else if (position == 1) {
-//            mRadioGroup.clearCheck();
-//            option_2.setChecked(true);
-//        }
-//    }
 
+    //
     @Override
-    public void onBackPressed() {//重写的Activity返回
-
-        Intent intent = new Intent();
-        intent.setAction("android.intent.action.MAIN");
-        intent.addCategory("android.intent.category.HOME");
-        startActivity(intent);
-
+    public void onSuccess(int position) {
+        if (position == 1) {
+            mRadioGroup.clearCheck();
+            option_1.setChecked(true);
+        }
     }
+
+//    @Override
+//    public void onBackPressed() {//重写的Activity返回
+//
+//        Intent intent = new Intent();
+//        intent.setAction("android.intent.action.MAIN");
+//        intent.addCategory("android.intent.category.HOME");
+//        startActivity(intent);
+//
+//    }
 }

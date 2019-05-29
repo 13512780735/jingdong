@@ -21,6 +21,8 @@
             android:id="@+id/tv_rlupdate_version"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
