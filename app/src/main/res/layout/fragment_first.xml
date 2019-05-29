@@ -17,14 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-          <likeit.com.jingdong.view.MyX5WebView
-                   android:id="@+id/main_web"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
-   <!--     <WebView
+
+        <likeit.com.jingdong.view.MyX5WebView
             android:id="@+id/main_web"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></WebView>-->
+            android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>
+        <!--     <WebView
+                 android:id="@+id/main_web"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"></WebView>-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -42,9 +43,9 @@
                     android:id="@+id/rl_search"
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
                     app:contentBackColor="#999999"
                     app:cornerRadius="40dp"
-                    android:layout_margin="@dimen/dp_10"
                     app:strokeColor01="#999999"
                     app:strokeWidth01="1dp">
 
@@ -60,8 +61,8 @@
                     android:id="@+id/rl_cart"
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
-                    app:contentBackColor="#999999"
                     android:layout_margin="@dimen/dp_10"
+                    app:contentBackColor="#999999"
                     app:cornerRadius="40dp"
                     app:strokeColor01="#999999"
                     app:strokeWidth01="1dp">
@@ -78,9 +79,9 @@
                     android:id="@+id/rl_shop"
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
                     app:contentBackColor="#999999"
                     app:cornerRadius="40dp"
-                    android:layout_margin="@dimen/dp_10"
                     app:strokeColor01="#999999"
                     app:strokeWidth01="1dp">
 
@@ -96,9 +97,9 @@
                     android:id="@+id/rl_top"
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
                     app:contentBackColor="#999999"
                     app:cornerRadius="40dp"
-                    android:layout_margin="@dimen/dp_10"
                     app:strokeColor01="#999999"
                     app:strokeWidth01="1dp">
 

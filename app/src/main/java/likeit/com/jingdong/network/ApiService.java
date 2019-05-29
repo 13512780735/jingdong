@@ -3,6 +3,7 @@ package likeit.com.jingdong.network;
 
 import likeit.com.jingdong.network.model.BaseResponse;
 import likeit.com.jingdong.network.model.CodeModel;
+import likeit.com.jingdong.network.model.GoodsListModel;
 import likeit.com.jingdong.network.model.LoginModel;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -49,16 +50,28 @@ public interface ApiService {
     Observable<BaseResponse<LoginModel>> UserLogin(@Field("username") String mobile,
                                                    @Field("pwd") String pwd
     );
-//获取二维码
+
+    //获取二维码
     @FormUrlEncoded
     @POST("index.php?i=1&c=entry&r=dealer.api.account.manage")
     Observable<BaseResponse<CodeModel>> getCode(@Field("openid") String openid,
                                                 @Field("dealerid") String dealerid
     );
+
     @FormUrlEncoded
     @POST("index.php?i=1&c=entry&r=dealer.api.category.categorylist")
-    Observable<BaseResponse<CodeModel>> getGoodsList(@Field("openid") String openid,
-                                                @Field("dealerid") String dealerid
+    Observable<BaseResponse<GoodsListModel>> getGoodsList(@Field("openid") String openid,
+                                                          @Field("dealerid") String dealerid,
+                                                          @Field("keywords") String keywords,
+                                                          @Field("attribute") String attribute,
+                                                          @Field("merchid") String merchid,
+                                                          @Field("brandsid") String brandsid,
+                                                          @Field("order") String order,
+                                                          @Field("by") String by,
+                                                          @Field("pricemin") String pricemin,
+                                                          @Field("pricemax") String pricemax,
+                                                          @Field("pageNum") String pageNum,
+                                                          @Field("cid") String cid
     );
 
 

@@ -14,29 +14,71 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <include layout="@layout/goods_list_view"></include>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <likeit.com.jingdong.view.BorderRelativeLayout
-                android:id="@+id/rl_back"
-                android:layout_width="@dimen/width80"
-                android:layout_height="@dimen/width80"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/dp_10"
-                app:contentBackColor="#999999"
-                app:cornerRadius="40dp"
-                app:strokeColor01="#999999"
-                app:strokeWidth01="1dp">
+                android:layout_marginRight="@dimen/dp_10"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@mipmap/icon_back_1" />
-            </likeit.com.jingdong.view.BorderRelativeLayout>
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_home"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_home" />
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_back"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_back_1" />
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+
+                <likeit.com.jingdong.view.BorderRelativeLayout
+                    android:id="@+id/rl_top"
+                    android:layout_width="@dimen/width80"
+                    android:layout_height="@dimen/width80"
+                    android:layout_margin="@dimen/dp_10"
+                    app:contentBackColor="#999999"
+                    app:cornerRadius="40dp"
+                    app:strokeColor01="#999999"
+                    app:strokeWidth01="1dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/icon_top" />
+                </likeit.com.jingdong.view.BorderRelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
 
     </FrameLayout>

@@ -12,13 +12,14 @@ import com.bumptech.glide.Priority;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import likeit.com.jingdong.AppManager;
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.fragment.dialogCodeFragment;
 import likeit.com.jingdong.view.BorderRelativeLayout;
 import likeit.com.jingdong.view.BorderTextView;
 
 public class GoodsListActivity extends BaseActivity implements View.OnClickListener {
-    BorderRelativeLayout rlBack;
+    BorderRelativeLayout rlBack, rlHome, rlTop;
     private ImageView tvRight;
     private dialogCodeFragment dialog;
 
@@ -34,7 +35,11 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     private void initUI() {
         tvRight = findViewById(R.id.tv_right);
         rlBack = findViewById(R.id.rl_back);
+        rlHome = findViewById(R.id.rl_home);
+        rlTop = findViewById(R.id.rl_top);
         rlBack.setOnClickListener(this);
+        rlHome.setOnClickListener(this);
+        rlTop.setOnClickListener(this);
         Glide.with(this)
                 .load(R.mipmap.ic_code)
                 .animate(R.anim.item_alpha_in)
@@ -54,6 +59,12 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.rl_home:
+                toActivity(MainActivity.class);
+                AppManager.getAppManager().finishAllActivity();
+                break;
+            case R.id.rl_top:
                 break;
         }
 

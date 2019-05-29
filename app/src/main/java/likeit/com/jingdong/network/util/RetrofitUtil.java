@@ -11,6 +11,7 @@ import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.network.consts.Consts;
 import likeit.com.jingdong.network.model.BaseResponse;
 import likeit.com.jingdong.network.model.CodeModel;
+import likeit.com.jingdong.network.model.GoodsListModel;
 import likeit.com.jingdong.network.model.LoginModel;
 import okhttp3.OkHttpClient;
 import okhttp3.internal.platform.Platform;
@@ -92,8 +93,34 @@ public class RetrofitUtil {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
+
+    /**
+     * 获取二维码
+     *
+     * @param openid
+     * @param dealerid
+     * @param subscriber
+     */
     public void getCode(String openid, String dealerid, Subscriber<BaseResponse<CodeModel>> subscriber) {
         mApiService.getCode(openid, dealerid)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取商品列表
+     *
+     * @param openid
+     * @param dealerid
+     * @param subscriber
+     */
+
+    public void getGoodsList(String openid, String dealerid, String keywords, String merchid, String attribute, String brandsid,
+                             String order, String by, String pricemin, String pricemax, String pageNum, String cid,
+                             Subscriber<BaseResponse<GoodsListModel>> subscriber) {
+        mApiService.getGoodsList(openid, dealerid, keywords, attribute, merchid, brandsid, order, by, pricemin, pricemax, pageNum, cid)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
