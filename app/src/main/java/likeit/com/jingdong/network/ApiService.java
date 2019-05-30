@@ -73,6 +73,9 @@ public interface ApiService {
                                                           @Field("pageNum") String pageNum,
                                                           @Field("cid") String cid
     );
-
+    @FormUrlEncoded
+    @POST("index.php?i=1&c=entry&r=dealer.api.category.category")
+    Observable<BaseResponse<GoodsListModel>> getclassifyList(@Field("openid") String openid
+    );
 
 }

@@ -207,7 +207,7 @@ public class GoodsListModel {
         }
     }
 
-    public static class FiltrateBean {
+    public static class FiltrateBean implements Serializable{
         /**
          * title : 商品属性
          * name : property

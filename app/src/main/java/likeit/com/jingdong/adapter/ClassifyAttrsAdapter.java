@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +17,12 @@ import likeit.com.jingdong.network.model.GoodsListModel;
 /**
  * 子属性GridView的适配器
  */
-public class GoodsAttrsAdapter extends BaseAdapter {
+public class ClassifyAttrsAdapter extends BaseAdapter {
 
     private Context context;
     private List<GoodsListModel.FiltrateBean.ListBeanX> data = new ArrayList<GoodsListModel.FiltrateBean.ListBeanX>();
 
-    public GoodsAttrsAdapter(Context context) {
+    public ClassifyAttrsAdapter(Context context) {
         this.context = context;
     }
 

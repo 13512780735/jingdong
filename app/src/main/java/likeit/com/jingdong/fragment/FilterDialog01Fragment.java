@@ -46,9 +46,9 @@ public class FilterDialog01Fragment extends DialogFragment {
     private String attribute1 = "";
     private String brandsid = "";
 
-    private OnFilterFinishListener mOnFilterFinishListener;
     private LinearLayout ll_bg;
     private ImageView iv_close;
+    private OnFilterFinishListener mOnFilterFinishListener;
 
     public void setOnSelectInforCompleted(OnFilterFinishListener onFilterFinishListener) {
         mOnFilterFinishListener = onFilterFinishListener;
@@ -150,7 +150,6 @@ public class FilterDialog01Fragment extends DialogFragment {
         itemData = filtrateBean;
         adapter = new GoodsAttrListAdapter(getActivity(), itemData);
         selectionList.setAdapter(adapter);
-        initData();
         // 重置的点击监听，将所有选项全设为false
         filterReset.setOnClickListener(new View.OnClickListener() {
 
@@ -163,7 +162,7 @@ public class FilterDialog01Fragment extends DialogFragment {
                     //跳过已设置的选中的位置的状态
                     serviceList.get(i).setChecked(false);
                 }
-                serviceAdapter.notifyDataSetChanged(true, serviceList);
+               // serviceAdapter.notifyDataSetChanged(true, serviceList);
                 //   initData();
 //
                 for (int i = 0; i < itemData.size(); i++) {
