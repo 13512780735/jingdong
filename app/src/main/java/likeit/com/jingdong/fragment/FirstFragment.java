@@ -86,6 +86,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 .animate(R.anim.item_alpha_in)
                 .priority(Priority.HIGH)
                 .into(tvRight);
+        mWebView.clearHistory();
         mWebView.loadUrl(url);
         tvRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,10 +171,15 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
 
         @JavascriptInterface
-        public void OpenDesc(String data) {
+        public void openDesc(String data) {
             try {
                 JSONObject jsonObject = new JSONObject(data);
+                String id = jsonObject.optString("id");
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+
                 Intent intent = new Intent(getActivity(), GoodDescActivity.class);
+                intent.putExtras(bundle);
                 getActivity().startActivity(intent);
                 Log.d("TAG88888", jsonObject.toString());
 //                if (listener != null) {

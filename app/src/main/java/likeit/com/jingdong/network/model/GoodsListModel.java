@@ -1,5 +1,6 @@
 package likeit.com.jingdong.network.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GoodsListModel {
@@ -218,7 +219,14 @@ public class GoodsListModel {
         private String name;
         private String fields;
         private List<ListBeanX> list;
+        private boolean nameIsChecked;
+        public boolean isNameIsChecked() {
+            return nameIsChecked;
+        }
 
+        public void setNameIsChecked(boolean nameIsChecked) {
+            this.nameIsChecked = nameIsChecked;
+        }
         public String getTitle() {
             return title;
         }
@@ -251,7 +259,7 @@ public class GoodsListModel {
             this.list = list;
         }
 
-        public static class ListBeanX {
+        public static class ListBeanX implements Serializable {
             /**
              * id : 0
              * name : 推荐商品
@@ -261,7 +269,15 @@ public class GoodsListModel {
             private String id;
             private String name;
             private boolean type;
+            private boolean isChecked;
 
+            public boolean isChecked() {
+                return isChecked;
+            }
+
+            public void setChecked(boolean isChecked) {
+                this.isChecked = isChecked;
+            }
             public String getId() {
                 return id;
             }

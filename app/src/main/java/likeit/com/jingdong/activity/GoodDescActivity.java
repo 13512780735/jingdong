@@ -26,6 +26,7 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import likeit.com.jingdong.AppManager;
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.fragment.dialogCodeFragment;
 import likeit.com.jingdong.network.ApiService;
@@ -44,6 +45,7 @@ public class GoodDescActivity extends BaseActivity {
     private com.tencent.smtt.sdk.WebSettings mWebSettings;
     private OpenFileWebChromeClient mOpenFileWebChromeClient;
     private dialogCodeFragment dialog;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +55,15 @@ public class GoodDescActivity extends BaseActivity {
         setContentView(R.layout.activity_good_desc);
         String dealerid = SharedPreferencesUtils.getString(mContext, "dealer_id");
         String openid = SharedPreferencesUtils.getString(mContext, "openid");
-        url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid;
+        id = getIntent().getExtras().getString("id");
+        url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid + "&id=" + id;
         initUI();
         initWebViewSettings();
 
     }
 
     private void initUI() {
-        tvRight = findViewById(R.id.rl_back);
+        rlBack = findViewById(R.id.rl_back);
         mWebView = findViewById(R.id.main_web);
         mWebView.loadUrl(url);
         tvRight = findViewById(R.id.tv_right);
@@ -113,21 +116,15 @@ public class GoodDescActivity extends BaseActivity {
     private final class JSInterface {
         @SuppressLint("JavascriptInterface")
         @JavascriptInterface
-        public void OpenDesc(String data) {
-            try {
-                JSONObject jsonObject = new JSONObject(data);
-                Log.d("TAG88888", jsonObject.toString());
-//                if (listener != null) {
-//                    listener.onSuccess(1);
-//                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        public void toHome() {
+            toActivity(MainActivity.class);
+            AppManager.getAppManager().finishAllActivity();
         }
-//        @JavascriptInterface
-//        public  void Back(){
-//
-//        }
+
+        @JavascriptInterface
+        public void back() {
+            finish();
+        }
     }
 
     public class OpenFileWebChromeClient extends WebChromeClient {

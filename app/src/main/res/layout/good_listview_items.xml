@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/width20"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <likeit.com.jingdong.view.RatioImageView
+        android:id="@+id/iv_goods_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/default_pic"
+        app:is_height_fix_drawable_size_ratio="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width60"
+        android:background="#BABABA">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:singleLine="true"
+            android:text=""
+            android:textColor="#666666" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/width70"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingLeft="@dimen/width30"
+        android:paddingRight="@dimen/width30"
+        android:paddingTop="@dimen/dp_10">
+
+        <likeit.com.jingdong.view.BorderTextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="¥48"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:contentBackColor="@color/bt_bg"
+            app:cornerRadius="0dp"
+            app:strokeColor01="@color/bt_bg"
+            app:strokeWidth01="3dp" />
+
+        <likeit.com.jingdong.view.BorderTextView
+            android:id="@+id/tv_buy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="立即抢购"
+            android:textColor="@color/bt_bg"
+            app:contentBackColor="@color/white"
+            app:cornerRadius="0dp"
+            app:strokeColor01="@color/bt_bg"
+            app:strokeWidth01="3dp" />
+    </LinearLayout>
+</LinearLayout>
