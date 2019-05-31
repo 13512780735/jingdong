@@ -3,6 +3,7 @@ package likeit.com.jingdong.activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,7 +23,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,6 +33,7 @@ import butterknife.OnClick;
 import likeit.com.jingdong.AppManager;
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.adapter.GoodListAdapter;
+import likeit.com.jingdong.fragment.ClassifyDialogFragment;
 import likeit.com.jingdong.fragment.FilterDialog01Fragment;
 import likeit.com.jingdong.fragment.dialogCodeFragment;
 import likeit.com.jingdong.listener.OnFilterFinishListener;
@@ -37,6 +41,7 @@ import likeit.com.jingdong.network.model.BaseResponse;
 import likeit.com.jingdong.network.model.GoodsListModel;
 import likeit.com.jingdong.network.util.RetrofitUtil;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderRelativeLayout;
 import rx.Subscriber;
 
@@ -95,7 +100,41 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     private String attribute, merchid, order, by, pricemin, pricemax, keywords, brandsid, cid;
     private GoodListAdapter mAdapter;
     private GoodsListModel goodsListModel;
+    private TextView tv_date,tv_time;
+    class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = 1;//消息(一个整型值)
+                    mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
 
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss   ");
+                    String data = format.format(date);
+                    tv_date.setText(data); //更新时间
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +151,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         brandsid = "";
         cid = "";
         initUI();
+        new TimeThread().start();
     }
 
     private List<GoodsListModel.ListBean> data = new ArrayList<>();
@@ -128,7 +168,10 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
-
+        tv_date =findViewById(R.id.tv_date);
+        tv_time = findViewById(R.id.tv_time);
+//        tv_date.setText(StringUtil.getCurrentDate());
+//        tv_time.setText(StringUtil.getTime());
         tvRight = findViewById(R.id.tv_right);
         rlBack = findViewById(R.id.rl_back);
         rlHome = findViewById(R.id.rl_home);
@@ -290,13 +333,17 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    @OnClick({R.id.rl_back, R.id.rl_home, R.id.rl_top, R.id.tv_synthesis_sort, R.id.layout_synthesis_sort, R.id.tv_sales_sort, R.id.layout_sales_sort, R.id.tv_sort_price, R.id.layout_expert_service, R.id.tv_filter_sort, R.id.layout_filter_sort})
+    @OnClick({R.id.rl_back, R.id.tv_classify, R.id.rl_classify, R.id.rl_home, R.id.rl_top, R.id.tv_synthesis_sort, R.id.layout_synthesis_sort, R.id.tv_sales_sort, R.id.layout_sales_sort, R.id.tv_sort_price, R.id.layout_expert_service, R.id.tv_filter_sort, R.id.layout_filter_sort})
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
             case R.id.rl_back:
                 finish();
+                break;
+            case R.id.tv_classify:
+            case R.id.rl_classify:
+                showClassifyDialog();
                 break;
             case R.id.rl_top://置頂
                 mRecyclerView.smoothScrollToPosition(0);//滑到顶部
@@ -413,6 +460,11 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    private void showClassifyDialog() {
+        ClassifyDialogFragment classifyDialogFragment = new ClassifyDialogFragment();
+        classifyDialogFragment.show(getSupportFragmentManager(), "classifyDialogFragment");
+    }
+
     private void showFilter() {
         FilterDialog01Fragment filterDialogFragment = new FilterDialog01Fragment();
         filterDialogFragment.setOnSelectInforCompleted(this);
@@ -421,8 +473,8 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void selectInforCompleted(String attribute01, String brandsid01) {
-        Log.d("TAG","8885-->"+attribute01);
-        Log.d("TAG","9992-->"+brandsid01);
+        Log.d("TAG", "8885-->" + attribute01);
+        Log.d("TAG", "9992-->" + brandsid01);
         attribute = attribute01;
         brandsid = brandsid01;
         initAdapter();

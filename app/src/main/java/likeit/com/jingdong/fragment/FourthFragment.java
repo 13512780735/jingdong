@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,12 +19,16 @@ import android.widget.TextView;
 
 import com.tencent.bugly.beta.Beta;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.activity.LoginActivity;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.listener.OnLoginInforCompleted;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderTextView;
 import likeit.com.jingdong.view.MyX5WebView;
 
@@ -36,6 +42,43 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
     private dialogFragment dialog = null;
     View view;
 
+
+    class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = 1;//消息(一个整型值)
+                    mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss   ");
+                    String data = format.format(date);
+                    tv_date.setText(data); //更新时间
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    };
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,11 +88,17 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
 
         dialogShow();
         initUI(view);
+        new TimeThread().start();
         return view;
     }
 
-    private void dialogShow() {
+    TextView tv_date, tv_time;
 
+    private void dialogShow() {
+        tv_date = view.findViewById(R.id.tv_date);
+        tv_time = view.findViewById(R.id.tv_time);
+//        tv_date.setText(StringUtil.getCurrentDate());
+//        tv_time.setText(StringUtil.getTime());
         ll_bg.setVisibility(View.GONE);
         dialogFragment dialog = new dialogFragment();
         dialog.setOnLoginInforCompleted(this);
@@ -124,8 +173,8 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
             ll_bg.setVisibility(View.VISIBLE);
         } else {
             listener.onSuccess(1);
-          //  dialog.dismiss();
-            if(dialog!=null){
+            //  dialog.dismiss();
+            if (dialog != null) {
                 dialog.dismiss();
             }
         }

@@ -306,13 +306,16 @@ public class StringUtil {
         }
         return null;
     }
+
     public static String getDateToString(long milSecond, String pattern) {
         Date date = new Date(milSecond);
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
     }
+
     /**
-     *字符串转时间戳
+     * 字符串转时间戳
+     *
      * @param dateString
      * @param pattern
      * @return
@@ -320,14 +323,15 @@ public class StringUtil {
     public static long getStringToDate(String dateString, String pattern) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         Date date = new Date();
-        try{
+        try {
             date = dateFormat.parse(dateString);
-        } catch(ParseException e) {
+        } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return date.getTime();
     }
+
     /**
      * 日期（天）相加减
      *
@@ -348,6 +352,7 @@ public class StringUtil {
         String date = StringUtil.getDate(mCalendar.getTime(), "yyyy-MM-dd");
         return date;
     }
+
     public static String formatData(String dataFormat, long timeStamp) {
         if (timeStamp == 0) {
             return "";
@@ -358,6 +363,7 @@ public class StringUtil {
         result = format.format(new Date(timeStamp));
         return result;
     }
+
     /**
      * 日期（月份）相加减
      *
@@ -965,6 +971,27 @@ public class StringUtil {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd",
                 Locale.getDefault());
         return sf.format(new Date(time));
+    }
+
+    public static String getTime() {
+        Calendar cal = Calendar.getInstance();
+        String hour;
+        cal.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+
+        String year = String.valueOf(cal.get(Calendar.YEAR));
+        String month = String.valueOf(cal.get(Calendar.MONTH)) + 1;
+        String day = String.valueOf(cal.get(Calendar.DATE));
+        if (cal.get(Calendar.AM_PM) == 0)
+            hour = String.valueOf(cal.get(Calendar.HOUR));
+        else
+            hour = String.valueOf(cal.get(Calendar.HOUR) + 12);
+        String minute = String.valueOf(cal.get(Calendar.MINUTE));
+        String second = String.valueOf(cal.get(Calendar.SECOND));
+
+        String my_time_1 = year + "-" + month + "-" + day;
+        String my_time_2 = hour + ":" + minute ;
+
+        return my_time_2;
     }
 
     /**

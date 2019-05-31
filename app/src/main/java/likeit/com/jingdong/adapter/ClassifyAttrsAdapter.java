@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import likeit.com.jingdong.R;
-import likeit.com.jingdong.network.model.GoodsListModel;
+import likeit.com.jingdong.network.model.ClassifyListModel;
 
 
 /**
@@ -20,7 +20,7 @@ import likeit.com.jingdong.network.model.GoodsListModel;
 public class ClassifyAttrsAdapter extends BaseAdapter {
 
     private Context context;
-    private List<GoodsListModel.FiltrateBean.ListBeanX> data = new ArrayList<GoodsListModel.FiltrateBean.ListBeanX>();
+    private List<ClassifyListModel.ListBean.TwotierBean> data = new ArrayList<ClassifyListModel.ListBean.TwotierBean>();
 
     public ClassifyAttrsAdapter(Context context) {
         this.context = context;
@@ -76,7 +76,7 @@ public class ClassifyAttrsAdapter extends BaseAdapter {
     }
 
     public void notifyDataSetChanged(boolean isUnfold,
-                                     final List<GoodsListModel.FiltrateBean.ListBeanX> tempData) {
+                                     final List<ClassifyListModel.ListBean.TwotierBean> tempData) {
         if (tempData == null || 0 == tempData.size()) {
             return;
         }
@@ -96,21 +96,85 @@ public class ClassifyAttrsAdapter extends BaseAdapter {
                 data.add(tempData.get(2));
                 data.add(tempData.get(3));
                 data.add(tempData.get(4));
-            } else if (tempData.size() >= 6) {
+            } else if (tempData.size() == 6) {
                 data.add(tempData.get(0));
                 data.add(tempData.get(1));
                 data.add(tempData.get(2));
                 data.add(tempData.get(3));
                 data.add(tempData.get(4));
                 data.add(tempData.get(5));
-            } else if(tempData.size()==3){
+            }
+            else if (tempData.size() == 7) {
                 data.add(tempData.get(0));
                 data.add(tempData.get(1));
                 data.add(tempData.get(2));
-            }else if(tempData.size()==2){
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+            } else if (tempData.size() == 8) {
                 data.add(tempData.get(0));
                 data.add(tempData.get(1));
-            }else {
+                data.add(tempData.get(2));
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+                data.add(tempData.get(7));
+            } else if (tempData.size() == 9) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+                data.add(tempData.get(2));
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+                data.add(tempData.get(7));
+                data.add(tempData.get(8));
+            } else if (tempData.size() == 10) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+                data.add(tempData.get(2));
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+                data.add(tempData.get(7));
+                data.add(tempData.get(8));
+                data.add(tempData.get(9));
+            } else if (tempData.size() == 11) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+                data.add(tempData.get(2));
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+                data.add(tempData.get(7));
+                data.add(tempData.get(8));
+                data.add(tempData.get(9));
+                data.add(tempData.get(10));
+            } else if (tempData.size() == 12) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+                data.add(tempData.get(2));
+                data.add(tempData.get(3));
+                data.add(tempData.get(4));
+                data.add(tempData.get(5));
+                data.add(tempData.get(6));
+                data.add(tempData.get(7));
+                data.add(tempData.get(8));
+                data.add(tempData.get(9));
+                data.add(tempData.get(10));
+                data.add(tempData.get(11));
+            } else if (tempData.size() == 3) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+                data.add(tempData.get(2));
+            } else if (tempData.size() == 2) {
+                data.add(tempData.get(0));
+                data.add(tempData.get(1));
+            } else {
                 data.add(tempData.get(0));
             }
 

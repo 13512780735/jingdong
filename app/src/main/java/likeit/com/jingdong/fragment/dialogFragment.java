@@ -91,15 +91,15 @@ public class dialogFragment extends DialogFragment {
         edpwd = view.findViewById(R.id.edpwd);
         tvTitle = view.findViewById(R.id.tv_title);
         tv_confirm = view.findViewById(R.id.tv_confirm);
-        tv_cancle = view.findViewById(R.id.tv_cancle);
-        tv_cancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getDialog().dismiss();
-                listener.onSuccess(1);
-                // mOnLoginInforCompleted.inputLoginInforCompleted("2");
-            }
-        });
+        //tv_cancle = view.findViewById(R.id.tv_cancle);
+//        tv_cancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getDialog().dismiss();
+//                listener.onSuccess(1);
+//                // mOnLoginInforCompleted.inputLoginInforCompleted("2");
+//            }
+//        });
         tv_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

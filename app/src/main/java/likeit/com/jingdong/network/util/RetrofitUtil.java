@@ -10,6 +10,7 @@ import likeit.com.jingdong.BuildConfig;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.network.consts.Consts;
 import likeit.com.jingdong.network.model.BaseResponse;
+import likeit.com.jingdong.network.model.ClassifyListModel;
 import likeit.com.jingdong.network.model.CodeModel;
 import likeit.com.jingdong.network.model.GoodsListModel;
 import likeit.com.jingdong.network.model.LoginModel;
@@ -127,6 +128,20 @@ public class RetrofitUtil {
                 .subscribe(subscriber);
     }
 
+    /**
+     * 获取分类列表
+     *
+     * @param openid
+     * @param subscriber
+     */
+
+    public void getclassifyList(String openid, Subscriber<BaseResponse<ClassifyListModel>> subscriber) {
+        mApiService.getclassifyList(openid)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
     private <T> void toSubscribe(Observable<T> observable, Subscriber<T> subscriber) {
         observable.subscribeOn(Schedulers.io())

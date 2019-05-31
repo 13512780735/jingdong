@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -23,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,6 +36,7 @@ import likeit.com.jingdong.R;
 import likeit.com.jingdong.fragment.dialogCodeFragment;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderRelativeLayout;
 import likeit.com.jingdong.view.BorderTextView;
 import likeit.com.jingdong.view.MyX5WebView;
@@ -47,6 +53,41 @@ public class GoodDescActivity extends BaseActivity {
     private dialogCodeFragment dialog;
     private String id;
 
+    class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = 1;//消息(一个整型值)
+                    mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss   ");
+                    String data = format.format(date);
+                    tv_date.setText(data); //更新时间
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +99,18 @@ public class GoodDescActivity extends BaseActivity {
         id = getIntent().getExtras().getString("id");
         url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid + "&id=" + id;
         initUI();
+        new TimeThread().start();
         initWebViewSettings();
 
     }
 
+    TextView tv_date, tv_time;
+
     private void initUI() {
+        tv_date = findViewById(R.id.tv_date);
+        tv_time = findViewById(R.id.tv_time);
+//        tv_date.setText(StringUtil.getCurrentDate());
+//        tv_time.setText(StringUtil.getTime());
         rlBack = findViewById(R.id.rl_back);
         mWebView = findViewById(R.id.main_web);
         mWebView.loadUrl(url);

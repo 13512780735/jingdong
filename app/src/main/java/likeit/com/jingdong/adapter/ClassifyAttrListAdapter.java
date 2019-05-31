@@ -14,14 +14,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import likeit.com.jingdong.R;
-import likeit.com.jingdong.network.model.GoodsListModel;
+import likeit.com.jingdong.network.model.ClassifyListModel;
 
 public class ClassifyAttrListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<GoodsListModel.FiltrateBean> data;
+    private List<ClassifyListModel.ListBean> data;
 
-    public ClassifyAttrListAdapter(Context context, List<GoodsListModel.FiltrateBean> data) {
+    public ClassifyAttrListAdapter(Context context, List<ClassifyListModel.ListBean> data) {
         this.context = context;
         this.data = data;
     }
@@ -55,10 +55,11 @@ public class ClassifyAttrListAdapter extends BaseAdapter {
         } else {
             myView = (MyView) v.getTag();
         }
-        myView.name.setText(data.get(position).getTitle());
-        final GoodsAttrsAdapter adapter = new GoodsAttrsAdapter(context);
+        myView.name.setText(data.get(position).getName());
+        final ClassifyAttrsAdapter adapter = new ClassifyAttrsAdapter(context);
         myView.grid.setAdapter(adapter);
-        adapter.notifyDataSetChanged(data.get(position).isNameIsChecked(), data.get(position).getList());
+     //   adapter.notifyDataSetChanged();
+     adapter.notifyDataSetChanged(data.get(position).isNameIsChecked(), data.get(position).getTwotier());
 
         myView.img.setOnClickListener(new View.OnClickListener() {
 
@@ -69,7 +70,7 @@ public class ClassifyAttrListAdapter extends BaseAdapter {
 //                } else {
 //                    ((ImageView) v).setImageResource(R.drawable.sort_common_down);
 //                }
-                adapter.notifyDataSetChanged(data.get(position).isNameIsChecked(), data.get(position).getList());
+               adapter.notifyDataSetChanged(data.get(position).isNameIsChecked(), data.get(position).getTwotier());
                 data.get(position).setNameIsChecked(!data.get(position).isNameIsChecked());
             }
         });
@@ -78,21 +79,22 @@ public class ClassifyAttrListAdapter extends BaseAdapter {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 //设置当前选中的位置的状态为非。
-                data.get(position).getList().get(arg2).setChecked(!data.get(position).getList().get(arg2).isChecked());
+                data.get(position).getTwotier().get(arg2).setChecked(!data.get(position).getTwotier().get(arg2).isChecked());
                 //  myView.tv_name.setText(data.get(position).getSaleVo().get(arg2).getValue());
-                for (int i = 0; i < data.get(position).getList().size(); i++) {
+                for (int i = 0; i < data.get(position).getTwotier().size(); i++) {
                     //跳过已设置的选中的位置的状态
                     if (i == arg2) {
                         continue;
                     }
-                    data.get(position).getList().get(i).setChecked(false);
+                    data.get(position).getTwotier().get(i).setChecked(false);
                 }
 //                if (!data.get(position).isNameIsChecked()) {
 //                    myView.img.setImageResource(R.drawable.sort_common_up);
 //                } else {
 //                    myView.img.setImageResource(R.drawable.sort_common_down);
 //                }
-                adapter.notifyDataSetChanged(!data.get(position).isNameIsChecked(), data.get(position).getList());
+                //adapter.notifyDataSetChanged();
+              adapter.notifyDataSetChanged(!data.get(position).isNameIsChecked(), data.get(position).getTwotier());
             }
         });
         return v;

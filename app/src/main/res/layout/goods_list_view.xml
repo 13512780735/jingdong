@@ -75,6 +75,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:id="@+id/rl_classify"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -92,6 +93,7 @@
                     android:textSize="@dimen/txt_22" />
 
                 <likeit.com.jingdong.view.BorderTextView
+                    android:id="@+id/tv_classify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

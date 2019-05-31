@@ -50,6 +50,10 @@ public class FilterDialog01Fragment extends DialogFragment {
     private ImageView iv_close;
     private OnFilterFinishListener mOnFilterFinishListener;
 
+    List<GoodsListModel.FiltrateBean> filtrateBean;
+    private List<GoodsListModel.FiltrateBean.ListBeanX> serviceList;
+    private List<GoodsListModel.FiltrateBean> itemData;
+
     public void setOnSelectInforCompleted(OnFilterFinishListener onFilterFinishListener) {
         mOnFilterFinishListener = onFilterFinishListener;
     }
@@ -68,7 +72,7 @@ public class FilterDialog01Fragment extends DialogFragment {
         return view;
     }
 
-    List<GoodsListModel.FiltrateBean> filtrateBean;
+
 
     private void initData() {
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
@@ -98,8 +102,6 @@ public class FilterDialog01Fragment extends DialogFragment {
         });
     }
 
-    private List<GoodsListModel.FiltrateBean.ListBeanX> serviceList;
-    private List<GoodsListModel.FiltrateBean> itemData;
 
     private void initUI(View view) {
         ll_bg = view.findViewById(R.id.ll_bg);

@@ -27,8 +27,13 @@
         android:maxLines="1"
         android:text="京东家装 | 灯聚超市"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:textSize="@dimen/txt_24"
         android:textStyle="bold" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_title_bg"/>
 
     <ImageView
         android:id="@+id/tv_right"

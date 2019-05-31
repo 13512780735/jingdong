@@ -2,6 +2,7 @@ package likeit.com.jingdong.network;
 
 
 import likeit.com.jingdong.network.model.BaseResponse;
+import likeit.com.jingdong.network.model.ClassifyListModel;
 import likeit.com.jingdong.network.model.CodeModel;
 import likeit.com.jingdong.network.model.GoodsListModel;
 import likeit.com.jingdong.network.model.LoginModel;
@@ -74,8 +75,8 @@ public interface ApiService {
                                                           @Field("cid") String cid
     );
     @FormUrlEncoded
-    @POST("index.php?i=1&c=entry&r=dealer.api.category.category")
-    Observable<BaseResponse<GoodsListModel>> getclassifyList(@Field("openid") String openid
+    @POST("index.php?i=1&c=entry&r=dealer.api.category.ad_category")
+    Observable<BaseResponse<ClassifyListModel>> getclassifyList(@Field("openid") String openid
     );
 
 }

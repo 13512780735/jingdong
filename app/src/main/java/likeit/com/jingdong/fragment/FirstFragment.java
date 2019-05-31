@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +20,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
@@ -28,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.activity.GoodDescActivity;
@@ -35,6 +40,7 @@ import likeit.com.jingdong.activity.GoodsListActivity;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
+import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderRelativeLayout;
 import likeit.com.jingdong.view.MyX5WebView;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
@@ -62,6 +68,41 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    class TimeThread extends Thread {
+        @Override
+        public void run() {
+            do {
+                try {
+                    Thread.sleep(1000);
+                    Message msg = new Message();
+                    msg.what = 1;//消息(一个整型值)
+                    mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } while (true);
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss   ");
+                    String data = format.format(date);
+                    tv_date.setText(data); //更新时间
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,12 +111,21 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
         url = ApiService.Home + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
+//        TimeThread timeThread = new TimeThread();
+//        timeThread.run();
+        new TimeThread().start();
         initWebViewSettings();
         return view;
     }
 
+    TextView tv_date, tv_time;
+
     private void initUI(View view) {
         mWebView = view.findViewById(R.id.main_web);
+        tv_date = view.findViewById(R.id.tv_date);
+        tv_time = view.findViewById(R.id.tv_time);
+//        tv_date.setText(StringUtil.getCurrentDate());
+//        tv_time.setText(StringUtil.getTime());
         rlSearch = view.findViewById(R.id.rl_search);
         rlCart = view.findViewById(R.id.rl_cart);
         rlShop = view.findViewById(R.id.rl_shop);
