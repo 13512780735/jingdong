@@ -6,8 +6,8 @@ android {
         applicationId "likeit.com.jingdong"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.2"
+        versionCode 3
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     sourceSets {
@@ -54,4 +54,6 @@ dependencies {
     //bugly
     implementation 'com.tencent.bugly:crashreport_upgrade:1.3.5'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+
 }

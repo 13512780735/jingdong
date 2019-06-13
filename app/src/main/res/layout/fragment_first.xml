@@ -29,7 +29,6 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -45,10 +44,10 @@
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
                     android:layout_margin="@dimen/dp_10"
-                    app:contentBackColor="#999999"
+                    app:contentBackColor="#90000000"
                     app:cornerRadius="40dp"
-                    app:strokeColor01="#999999"
-                    app:strokeWidth01="1dp">
+                    app:strokeColor01="#90000000"
+                    app:strokeWidth01="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -63,16 +62,33 @@
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
                     android:layout_margin="@dimen/dp_10"
-                    app:contentBackColor="#999999"
+                    app:contentBackColor="#90000000"
                     app:cornerRadius="40dp"
-                    app:strokeColor01="#999999"
-                    app:strokeWidth01="1dp">
+                    app:strokeColor01="#90000000"
+                    app:strokeWidth01="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:src="@mipmap/icon_cart" />
+
+                    <likeit.com.jingdong.view.BorderTextView
+                        android:id="@+id/count"
+                        android:layout_width="30dip"
+                        android:layout_height="30dip"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:visibility="invisible"
+                        android:textStyle="bold"
+                        app:contentBackColor="#FF0000"
+                        app:cornerRadius="15dp"
+                        app:strokeColor01="#FF0000"
+                        app:strokeWidth01="0dp" />
 
                 </likeit.com.jingdong.view.BorderRelativeLayout>
 
@@ -81,10 +97,10 @@
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
                     android:layout_margin="@dimen/dp_10"
-                    app:contentBackColor="#999999"
+                    app:contentBackColor="#90000000"
                     app:cornerRadius="40dp"
-                    app:strokeColor01="#999999"
-                    app:strokeWidth01="1dp">
+                    app:strokeColor01="#90000000"
+                    app:strokeWidth01="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -99,10 +115,10 @@
                     android:layout_width="@dimen/width80"
                     android:layout_height="@dimen/width80"
                     android:layout_margin="@dimen/dp_10"
-                    app:contentBackColor="#999999"
+                    app:contentBackColor="#90000000"
                     app:cornerRadius="40dp"
-                    app:strokeColor01="#999999"
-                    app:strokeWidth01="1dp">
+                    app:strokeColor01="#90000000"
+                    app:strokeWidth01="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"

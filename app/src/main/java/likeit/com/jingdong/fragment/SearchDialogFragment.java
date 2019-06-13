@@ -56,8 +56,8 @@ public class SearchDialogFragment extends DialogFragment implements View.OnClick
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_bg.getLayoutParams();
 
-        params.width = height1 / 3;
-        params.height = width1 / 7;
+        params.width = width1 / 4*3;
+        params.height = height1 / 3;
         ll_bg.setLayoutParams(params);
     }
 
@@ -69,6 +69,9 @@ public class SearchDialogFragment extends DialogFragment implements View.OnClick
                 break;
             case R.id.tv_search:
                 Intent intent = new Intent(getActivity(), GoodsListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("keywords", edContent.getText().toString());
+                intent.putExtras(bundle);
                 getActivity().startActivity(intent);
                 break;
         }

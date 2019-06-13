@@ -18,6 +18,16 @@ public class MyApplication extends Application {
         initBugly();
     }
 
+    public static MyApplication mContext;
+
+    public static MyApplication getInstance() {
+        if (mContext == null) {
+            return new MyApplication();
+        } else {
+            return mContext;
+        }
+    }
+
     private void initBugly() {
         /**
          * Bugly更新

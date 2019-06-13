@@ -25,20 +25,37 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
+import com.loopj.android.http.RequestParams;
+import com.tencent.smtt.sdk.CookieManager;
+import com.tencent.smtt.sdk.CookieSyncManager;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import likeit.com.jingdong.MyApplication;
 import likeit.com.jingdong.R;
+import likeit.com.jingdong.activity.CartActivity;
 import likeit.com.jingdong.activity.GoodDescActivity;
 import likeit.com.jingdong.activity.GoodsListActivity;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.network.ApiService;
+import likeit.com.jingdong.network.model.WeatherModel;
+import likeit.com.jingdong.utils.HttpUtil;
+import likeit.com.jingdong.utils.IpGetUtil;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderRelativeLayout;
@@ -56,6 +73,25 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private ImageView tvRight;
     private dialogCodeFragment dialog;
     private BorderRelativeLayout rlSearch, rlCart, rlShop, rlTop;
+
+
+    private String ip;
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                //  WwIpView.setText("外网IP:" + msg.obj.toString());
+                ip = msg.obj.toString();
+                Log.d("TAG", "999-->" + ip);
+                initData();
+            }
+        }
+    };
+    private TextView count; //购物车数量
+    private String temperature;
+    private TextView tv_address;
+    private String address01;
+    private String shopname;
 
 
     @Override
@@ -109,20 +145,136 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
         String dealerid = SharedPreferencesUtils.getString(getActivity(), "dealer_id");
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
+        address01 = SharedPreferencesUtils.getString(getActivity(), "address");
+        shopname = SharedPreferencesUtils.getString(getActivity(), "shopname");
+        Log.d("TAG","address-->"+address01+"shopname-->"+shopname);
         url = ApiService.Home + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
 //        TimeThread timeThread = new TimeThread();
 //        timeThread.run();
         new TimeThread().start();
+        //getIPAddress();
+        GetNetIp();
+
         initWebViewSettings();
         return view;
     }
+
+    public void GetNetIp() {
+        new Thread() {
+            @Override
+            public void run() {
+                String line = "";
+                URL infoUrl = null;
+                InputStream inStream = null;
+                try {
+                    infoUrl = new URL("http://pv.sohu.com/cityjson?ie=utf-8");
+                    URLConnection connection = infoUrl.openConnection();
+                    HttpURLConnection httpConnection = (HttpURLConnection) connection;
+                    int responseCode = httpConnection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        inStream = httpConnection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inStream, "utf-8"));
+                        StringBuilder strber = new StringBuilder();
+                        while ((line = reader.readLine()) != null)
+                            strber.append(line + "\n");
+                        inStream.close();
+                        // 从反馈的结果中提取出IP地址
+                        int start = strber.indexOf("{");
+                        int end = strber.indexOf("}");
+                        String json = strber.substring(start, end + 1);
+                        if (json != null) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                line = jsonObject.optString("cip");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Message msg = new Message();
+                        msg.what = 1;
+                        msg.obj = line;
+                        //向主线程发送消息
+                        handler.sendMessage(msg);
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private String weather, address;
+
+    private void initData() {
+        Log.d("TAG", "9995-->" + ip);
+        //   String url = ApiService.Weather + "?key=" + "2b53d9a689993" + "&ip=" + ip;
+        String url = ApiService.Weather;
+        RequestParams params = new RequestParams();
+        params.put("key", "2b53d9a689993");
+        params.put("ip", ip);
+        HttpUtil.get(url, params, new HttpUtil.RequestListener() {
+            @Override
+            public void success(String response) {
+                Log.d("TAG", response.toString());
+                try {
+                    JSONObject object = new JSONObject(response);
+                    int retCode = object.optInt("retCode");
+                    String msg = object.optString("msg");
+                    if (retCode == 200) {
+                        JSONArray array = object.optJSONArray("result");
+                        Log.d("TAg", array.toString());
+                        JSONObject object1 = array.optJSONObject(0);
+                        //   WeatherModel weatherModel = array.optJSONObject(0);
+                        //   Log.d("TAg", weatherModel.toString());
+                        //   WeatherModel weatherModel=object.optJSONObject("result");
+                        // WeatherModel weatherModel= (WeatherModel) array.get(0);
+                        Log.d("TAG", "555-->" + object1.opt("city"));
+                        weather = object1.optString("weather");
+                        address = object1.optString("city");
+                        JSONArray array1 = object1.optJSONArray("future");
+                        JSONObject object2 = array1.optJSONObject(0);
+                        temperature = object2.optString("temperature");
+                        tv_time.setText(address + "  " + weather + " " + temperature);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void failed(Throwable e) {
+
+            }
+        });
+    }
+
 
     TextView tv_date, tv_time;
 
     private void initUI(View view) {
         mWebView = view.findViewById(R.id.main_web);
+        //安卓自带浏览器内核
+//        android.webkit.CookieSyncManager.createInstance(MyApplication.mContext);
+//        android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
+//        cookieManager.removeAllCookie();
+        //X5浏览器内核
+//        CookieSyncManager.createInstance(MyApplication.mContext);
+//        CookieManager x5cookieManager = CookieManager.getInstance();
+//        x5cookieManager.removeAllCookie();
+        //删除浏览器相关数据库
+//        MyApplication.mContext.deleteDatabase("webview.db");
+//        MyApplication.mContext.deleteDatabase("webviewCache.db");
+        mWebView.clearCache(true);
         tv_date = view.findViewById(R.id.tv_date);
+        tv_address = view.findViewById(R.id.tv_address);
+        tv_address.setText(address01 + "(" + shopname + ")");
+        count = view.findViewById(R.id.count);
+
         tv_time = view.findViewById(R.id.tv_time);
 //        tv_date.setText(StringUtil.getCurrentDate());
 //        tv_time.setText(StringUtil.getTime());
@@ -136,7 +288,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 .animate(R.anim.item_alpha_in)
                 .priority(Priority.HIGH)
                 .into(tvRight);
-        mWebView.clearHistory();
         mWebView.loadUrl(url);
         tvRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +297,8 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 dialog.show();
             }
         });
+
+
         rlSearch.setOnClickListener(this);
         rlCart.setOnClickListener(this);
         rlTop.setOnClickListener(this);
@@ -190,9 +343,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 showSearchDialog();
                 break;
             case R.id.rl_cart:
+                Intent intent01 = new Intent(getActivity(), CartActivity.class);
+                getActivity().startActivity(intent01);
                 break;
             case R.id.rl_shop:
                 Intent intent = new Intent(getActivity(), GoodsListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("keywords", "");
+                intent.putExtras(bundle);
                 getActivity().startActivity(intent);
                 break;
             case R.id.rl_top:

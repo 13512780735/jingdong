@@ -55,7 +55,7 @@ public class ClassifyAttrListAdapter extends BaseAdapter {
         } else {
             myView = (MyView) v.getTag();
         }
-        myView.name.setText(data.get(position).getName());
+        myView.name.setText(data.get(position).getTitel());
         final ClassifyAttrsAdapter adapter = new ClassifyAttrsAdapter(context);
         myView.grid.setAdapter(adapter);
      //   adapter.notifyDataSetChanged();

@@ -42,6 +42,16 @@ public interface ApiService {
     String Order = HOST + "/order.html";
 
     /**
+     * 天气
+     */
+    String Weather = "http://apicloud.mob.com/v1/weather/ip";
+    /**
+     * 商品列表
+     */
+    String GoodList = APP_HOST + "/index.php?i=1&c=entry&r=dealer.api.category.categorylist";
+    String ClassifyList = APP_HOST + "/index.php?i=1&c=entry&r=dealer.api.category.ad_category";
+
+    /**
      * 登录
      *
      * @return
@@ -74,6 +84,7 @@ public interface ApiService {
                                                           @Field("pageNum") String pageNum,
                                                           @Field("cid") String cid
     );
+
     @FormUrlEncoded
     @POST("index.php?i=1&c=entry&r=dealer.api.category.ad_category")
     Observable<BaseResponse<ClassifyListModel>> getclassifyList(@Field("openid") String openid

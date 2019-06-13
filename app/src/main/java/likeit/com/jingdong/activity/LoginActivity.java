@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity {
         params1.width = height1 / 4;
         params1.height = width1 / 6;
         iv_logo.setLayoutParams(params1);
-       // String imgURL = "https://wx.jddengju.com/attachment/images/global/f6WB6e7EFlCLee6elF6HewHXyEuBvl.jpg";
+        // String imgURL = "https://wx.jddengju.com/attachment/images/global/f6WB6e7EFlCLee6elF6HewHXyEuBvl.jpg";
         Glide.with(mContext)
                 .load(R.mipmap.login_bg)
                 .animate(R.anim.item_alpha_in)
@@ -89,8 +89,8 @@ public class LoginActivity extends BaseActivity {
         final String mobile = edphone.getText().toString().trim();
         final String pwd = edpwd.getText().toString().trim();
 
-         RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
-          //   RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
+        RetrofitUtil.getInstance().getUsersLogin(mobile, pwd, new Subscriber<BaseResponse<LoginModel>>() {
+            //   RetrofitUtil.getInstance().getUsersLogin("test01", "123456", new Subscriber<BaseResponse<LoginModel>>() {
             @Override
             public void onCompleted() {
 
@@ -104,13 +104,16 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onNext(BaseResponse<LoginModel> baseResponse) {
                 if (baseResponse.code == 200) {
-
+                    Log.d("TAG", "address-->" + baseResponse.getData().getAddress());
+                    Log.d("TAG", "shopname-->" + baseResponse.getData().getShopname());
                     SharedPreferencesUtils.put(mContext, "pwd", pwd);
                     SharedPreferencesUtils.put(mContext, "phone", mobile);
                     SharedPreferencesUtils.put(mContext, "openid", baseResponse.getData().getOpenid());
                     SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
                     SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());
                     SharedPreferencesUtils.put(mContext, "dealer_id", baseResponse.getData().getDealer_id());
+                    SharedPreferencesUtils.put(mContext, "address", baseResponse.getData().getAddress());
+                    SharedPreferencesUtils.put(mContext, "shopname", baseResponse.getData().getShopname());
                     toActivity(MainActivity.class);
                     finish();
                 }

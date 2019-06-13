@@ -92,6 +92,8 @@ public class WelcomeActivity extends BaseActivity {
                     SharedPreferencesUtils.put(mContext, "expire", baseResponse.getData().getExpire());
                     SharedPreferencesUtils.put(mContext, "token", baseResponse.getData().getToken());
                     SharedPreferencesUtils.put(mContext, "dealer_id", baseResponse.getData().getDealer_id());
+                    SharedPreferencesUtils.put(mContext, "address", baseResponse.getData().getAddress());
+                    SharedPreferencesUtils.put(mContext, "shopname", baseResponse.getData().getShopname());
                     toActivity(MainActivity.class);
                     finish();
                 }

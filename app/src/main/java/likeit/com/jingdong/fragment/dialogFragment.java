@@ -134,8 +134,8 @@ public class dialogFragment extends DialogFragment {
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_bg.getLayoutParams();
 
-        params.width = height1 / 3;
-        params.height = width1 / 7;
+        params.width = width1 / 5*4;
+        params.height = height1 / 3;
         ll_bg.setLayoutParams(params);
     }
 

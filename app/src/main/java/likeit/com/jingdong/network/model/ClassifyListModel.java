@@ -41,7 +41,7 @@ public class ClassifyListModel implements Serializable {
          */
 
         private String id;
-        private String name;
+        private String titel;
         private String thumb;
         private String rank;
         private String type;
@@ -64,12 +64,12 @@ public class ClassifyListModel implements Serializable {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
+        public String getTitel() {
+            return titel;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setTitel(String titel) {
+            this.titel = titel;
         }
 
         public String getThumb() {

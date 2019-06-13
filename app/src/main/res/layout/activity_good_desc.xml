@@ -31,10 +31,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/dp_10"
-                app:contentBackColor="#999999"
+                app:contentBackColor="#90000000"
                 app:cornerRadius="40dp"
-                app:strokeColor01="#999999"
-                app:strokeWidth01="1dp">
+                app:strokeColor01="#90000000"
+                app:strokeWidth01="0dp">
 
                 <ImageView
                     android:layout_width="wrap_content"

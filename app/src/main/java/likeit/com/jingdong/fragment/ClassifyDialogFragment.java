@@ -49,13 +49,13 @@ public class ClassifyDialogFragment extends DialogFragment {
     private ImageView iv_close;
 
 
-    private OnClassifyFinishListener mOnClassifyFinishListener;
     private ClassifyListModel classifyListModel;
     private List<ClassifyListModel.ListBean> listBean;
     private List<ClassifyListModel.ListBean.TwotierBean> serviceList;
     private List<ClassifyListModel.ListBean> itemData;
     private String str = "";
     private String strid = "";
+    private OnClassifyFinishListener mOnClassifyFinishListener;
 
     public void OnClassifyFinishListener(OnClassifyFinishListener onClassifyFinishListener) {
         mOnClassifyFinishListener = onClassifyFinishListener;

@@ -126,7 +126,7 @@ public class FilterDialog01Fragment extends DialogFragment {
         params.width = width1 / 4 * 3;
         params.height = height1 / 4 * 3;
         ll_bg.setLayoutParams(params);
-//        serviceAdapter = new GoodsAttrsAdapter(getActivity());
+        serviceAdapter = new GoodsAttrsAdapter(getActivity());
 //        serviceGrid.setAdapter(serviceAdapter);
 //        serviceAdapter.notifyDataSetChanged(true, serviceList);
 //        serviceGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -135,7 +135,6 @@ public class FilterDialog01Fragment extends DialogFragment {
 //            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 //                //设置当前选中的位置的状态为非。
 //                serviceList.get(position).setChecked(!serviceList.get(position).isChecked());
-//                XLog.e("position-->" + position);
 //                attribute1 = String.valueOf(position);
 //                for (int i = 0; i < serviceList.size(); i++) {
 //                    //跳过已设置的选中的位置的状态
