@@ -295,10 +295,10 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
                         //   WeatherModel weatherModel=object.optJSONObject("result");
                         // WeatherModel weatherModel= (WeatherModel) array.get(0);
                         Log.d("TAG", "555-->" + object1.opt("city"));
-                        weather = object1.optString("weather");
                         address = object1.optString("city");
                         JSONArray array1 = object1.optJSONArray("future");
                         JSONObject object2 = array1.optJSONObject(0);
+                        weather = object2.optString("dayTime");
                         temperature = object2.optString("temperature");
                         tv_time.setText(address + "  " + weather + " " + temperature);
                     }
