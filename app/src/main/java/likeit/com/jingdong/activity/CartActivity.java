@@ -111,6 +111,7 @@ public class CartActivity extends BaseActivity {
     };
     private String address01;
     private String shopname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,8 +122,9 @@ public class CartActivity extends BaseActivity {
         String openid = SharedPreferencesUtils.getString(mContext, "openid");
         address01 = SharedPreferencesUtils.getString(mContext, "address");
         shopname = SharedPreferencesUtils.getString(mContext, "shopname");
-       // id = getIntent().getExtras().getString("id");
+        // id = getIntent().getExtras().getString("id");
         url = ApiService.Cart + "?dealerid=" + dealerid + "&openid=" + openid;
+        Log.d("TAG","url-->"+url);
         initUI();
         new TimeThread().start();
         GetNetIp();
@@ -234,7 +236,7 @@ public class CartActivity extends BaseActivity {
         mWebView = findViewById(R.id.main_web);
         mWebView.loadUrl(url);
         tvRight = findViewById(R.id.tv_right);
-        tv_address =findViewById(R.id.tv_address);
+        tv_address = findViewById(R.id.tv_address);
         tv_address.setText(address01 + "(" + shopname + ")");
         Glide.with(this)
                 .load(R.mipmap.ic_code)
@@ -268,6 +270,7 @@ public class CartActivity extends BaseActivity {
         // 是否允许通过file url加载的Javascript读取全部资源(包括文件,http,https)，默认值 false
         mWebSettings.setAllowUniversalAccessFromFileURLs(true);
         mOpenFileWebChromeClient = new OpenFileWebChromeClient(this);
+        mWebView.clearCache(true);
         mWebView.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -294,6 +297,8 @@ public class CartActivity extends BaseActivity {
         public void back() {
             finish();
         }
+
+
     }
 
     public class OpenFileWebChromeClient extends WebChromeClient {

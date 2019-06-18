@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -127,6 +126,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     private FilterPopupClassifyWindow popupWindow1;
     private String temperature;
     private TextView tv_address;
+    private String cidName1;
 
 
     class TimeThread extends Thread {
@@ -189,11 +189,12 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         by = "";
         pricemin = "";
         pricemax = "";
+        cidName1=getIntent().getExtras().getString("cidName");
+        cid=getIntent().getExtras().getString("cid");
         keywords = getIntent().getExtras().getString("keywords");
         address01 = SharedPreferencesUtils.getString(mContext, "address");
         shopname = SharedPreferencesUtils.getString(mContext, "shopname");
         brandsid = "";
-        cid = "";
         initUI();
         initTopPop();
         new TimeThread().start();
@@ -356,7 +357,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
                 dialog.show();
             }
         });
-
+        tv_01.setText("所以分类：" + cidName1);
 
         iv_price.setBackgroundResource(R.mipmap.icon_sort_up_down);
         iv_sales.setBackgroundResource(R.mipmap.icon_sort_up_down);

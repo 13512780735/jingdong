@@ -5,6 +5,7 @@ import likeit.com.jingdong.network.model.BaseResponse;
 import likeit.com.jingdong.network.model.ClassifyListModel;
 import likeit.com.jingdong.network.model.CodeModel;
 import likeit.com.jingdong.network.model.GoodsListModel;
+import likeit.com.jingdong.network.model.GoodsListMoreModel;
 import likeit.com.jingdong.network.model.LoginModel;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -83,6 +84,16 @@ public interface ApiService {
                                                           @Field("pricemax") String pricemax,
                                                           @Field("pageNum") String pageNum,
                                                           @Field("cid") String cid
+    );
+
+    //获取更多
+    @FormUrlEncoded
+    @POST("index.php?i=1&c=entry&r=dealer.api.home.goodslists")
+    Observable<BaseResponse<GoodsListMoreModel>> getGoodsListMore(@Field("openid") String openid,
+                                                                  @Field("dealerid") String dealerid,
+                                                                  @Field("type") String type,
+                                                                  @Field("id") String id,
+                                                                  @Field("pageNum") String pageNum
     );
 
     @FormUrlEncoded

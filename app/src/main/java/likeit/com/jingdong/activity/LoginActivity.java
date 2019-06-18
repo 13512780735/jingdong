@@ -86,6 +86,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void toLogin() {
+        Log.d("TAG","点击了");
         final String mobile = edphone.getText().toString().trim();
         final String pwd = edpwd.getText().toString().trim();
 

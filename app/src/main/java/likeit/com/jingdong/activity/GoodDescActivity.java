@@ -126,6 +126,7 @@ public class GoodDescActivity extends BaseActivity {
         shopname = SharedPreferencesUtils.getString(mContext, "shopname");
         id = getIntent().getExtras().getString("id");
         url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid + "&id=" + id;
+        Log.d("TAG","url-->"+url);
         initUI();
         new TimeThread().start();
         GetNetIp();
@@ -259,6 +260,7 @@ public class GoodDescActivity extends BaseActivity {
     private void initWebViewSettings() {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebSettings = mWebView.getSettings();
+        mWebView.clearCache(true);
         mWebSettings.setJavaScriptEnabled(true);    //允许加载javascript
         mWebSettings.setSupportZoom(false);          //允许缩放
         mWebSettings.setBuiltInZoomControls(false);  //原网页基础上缩放
@@ -299,7 +301,21 @@ public class GoodDescActivity extends BaseActivity {
             toActivity(CartActivity.class);
             AppManager.getAppManager().finishAllActivity();
         }
-
+        @JavascriptInterface
+        public void setCartNumber(String data) {
+            Log.d("TAG","data-->"+data);
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                String num = jsonObject.optString("num");
+                SharedPreferencesUtils.put(mContext,"cartNum",num);
+                Log.d("TAG88888", jsonObject.toString());
+//                if (listener != null) {
+//                    listener.onSuccess(1);
+//                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         @JavascriptInterface
         public void back() {
             finish();

@@ -13,7 +13,13 @@
             android:id="@+id/main_web"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></likeit.com.jingdong.view.MyX5WebView>-->
+    <View
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"></View>
     <FrameLayout
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -83,8 +89,8 @@
                         android:text="2"
                         android:textColor="#FFFFFF"
                         android:textSize="14sp"
-                        android:visibility="invisible"
                         android:textStyle="bold"
+                        android:visibility="invisible"
                         app:contentBackColor="#FF0000"
                         app:cornerRadius="15dp"
                         app:strokeColor01="#FF0000"

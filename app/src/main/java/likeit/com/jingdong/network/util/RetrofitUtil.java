@@ -13,6 +13,7 @@ import likeit.com.jingdong.network.model.BaseResponse;
 import likeit.com.jingdong.network.model.ClassifyListModel;
 import likeit.com.jingdong.network.model.CodeModel;
 import likeit.com.jingdong.network.model.GoodsListModel;
+import likeit.com.jingdong.network.model.GoodsListMoreModel;
 import likeit.com.jingdong.network.model.LoginModel;
 import okhttp3.OkHttpClient;
 import okhttp3.internal.platform.Platform;
@@ -122,6 +123,15 @@ public class RetrofitUtil {
                              String order, String by, String pricemin, String pricemax, String pageNum, String cid,
                              Subscriber<BaseResponse<GoodsListModel>> subscriber) {
         mApiService.getGoodsList(openid, dealerid, keywords, attribute, merchid, brandsid, order, by, pricemin, pricemax, pageNum, cid)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public void getGoodsListMore(String openid, String dealerid, String type, String id, String pageNum,
+                                 Subscriber<BaseResponse<GoodsListMoreModel>> subscriber) {
+        mApiService.getGoodsListMore(openid, dealerid, type, id, pageNum)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

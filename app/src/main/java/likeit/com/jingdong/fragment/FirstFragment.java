@@ -14,12 +14,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 
@@ -46,11 +50,16 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import butterknife.BindView;
 import likeit.com.jingdong.MyApplication;
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.activity.CartActivity;
+import likeit.com.jingdong.activity.FilterPopupClassifyWindow;
+import likeit.com.jingdong.activity.FilterPopupWindow;
 import likeit.com.jingdong.activity.GoodDescActivity;
+import likeit.com.jingdong.activity.GoodList01Activity;
 import likeit.com.jingdong.activity.GoodsListActivity;
+import likeit.com.jingdong.listener.OnClassifyFinishListener;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.network.ApiService;
 import likeit.com.jingdong.network.model.WeatherModel;
@@ -62,7 +71,7 @@ import likeit.com.jingdong.view.BorderRelativeLayout;
 import likeit.com.jingdong.view.MyX5WebView;
 import likeit.com.jingdong.web.jsinterface.MediaUtility;
 
-public class FirstFragment extends Fragment implements View.OnClickListener {
+public class FirstFragment extends Fragment implements View.OnClickListener, OnClassifyFinishListener {
     MyX5WebView mWebView;
     private com.tencent.smtt.sdk.WebSettings mWebSettings;
     //    WebView mWebView;
@@ -73,7 +82,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private ImageView tvRight;
     private dialogCodeFragment dialog;
     private BorderRelativeLayout rlSearch, rlCart, rlShop, rlTop;
-
+    View ll_header;
 
     private String ip;
     public Handler handler = new Handler() {
@@ -92,6 +101,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     private TextView tv_address;
     private String address01;
     private String shopname;
+    private FilterPopupClassifyWindow popupWindow1;
 
 
     @Override
@@ -102,6 +112,19 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void selectInforCompleted01(String cidName, String id) {
+        Log.d("TAG", "8885-->" + cidName);
+        Log.d("TAG", "9992-->" + id);
+        Intent intent=new Intent(getActivity(),GoodsListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("keywords", "");
+        bundle.putString("cidName", cidName);
+        bundle.putString("cid", id);
+        intent.putExtras(bundle);
+        getActivity().startActivity(intent);
     }
 
     class TimeThread extends Thread {
@@ -147,7 +170,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         String openid = SharedPreferencesUtils.getString(getActivity(), "openid");
         address01 = SharedPreferencesUtils.getString(getActivity(), "address");
         shopname = SharedPreferencesUtils.getString(getActivity(), "shopname");
-        Log.d("TAG","address-->"+address01+"shopname-->"+shopname);
+        Log.d("TAG", "address-->" + address01 + "shopname-->" + shopname);
         url = ApiService.Home + "?dealerid=" + dealerid + "&openid=" + openid;
         initUI(view);
 //        TimeThread timeThread = new TimeThread();
@@ -155,11 +178,28 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         new TimeThread().start();
         //getIPAddress();
         GetNetIp();
-
+        initTopPop();
         initWebViewSettings();
         return view;
     }
 
+    private void initTopPop() {
+        popupWindow1 = new FilterPopupClassifyWindow(getActivity());
+        popupWindow1.setOnClassifyFinishListener(this);
+        popupWindow1.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                //popupwindow消失时使背景不透明
+               // bgAlpha(1f);
+            }
+        });
+    }
+    private void bgAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getActivity().getWindow().setAttributes(lp);
+    }
     public void GetNetIp() {
         new Thread() {
             @Override
@@ -257,6 +297,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     TextView tv_date, tv_time;
 
     private void initUI(View view) {
+        ll_header=view.findViewById(R.id.ll_header);
         mWebView = view.findViewById(R.id.main_web);
         //安卓自带浏览器内核
 //        android.webkit.CookieSyncManager.createInstance(MyApplication.mContext);
@@ -297,7 +338,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 dialog.show();
             }
         });
-
+        mWebView.evaluateJavascript("clearCart()", null);
 
         rlSearch.setOnClickListener(this);
         rlCart.setOnClickListener(this);
@@ -350,10 +391,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
                 Intent intent = new Intent(getActivity(), GoodsListActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("keywords", "");
+                bundle.putString("cidName", "");
+                bundle.putString("cid", "");
                 intent.putExtras(bundle);
                 getActivity().startActivity(intent);
                 break;
             case R.id.rl_top:
+                mWebView.evaluateJavascript("appScrollTop()", null);
                 break;
         }
     }
@@ -399,6 +443,34 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         }
 
         @JavascriptInterface
+        public void toMore(String data) {
+            Log.d("TAG", "data-->" + data);
+            try {
+                JSONObject jsonObject = new JSONObject(data);
+                String id = jsonObject.optString("id");
+                String type = jsonObject.optString("type");
+                String title = jsonObject.optString("title");
+                Log.d("TAG", "id-->" + id);
+                Log.d("TAG", "type-->" + type);
+                Log.d("TAG", "title-->" + title);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                bundle.putString("type", type);
+                bundle.putString("title", title);
+
+                Intent intent = new Intent(getActivity(), GoodList01Activity.class);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+//                Log.d("TAG88888", jsonObject.toString());
+//                if (listener != null) {
+//                    listener.onSuccess(1);
+//                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @JavascriptInterface
         public void OpenGoods(String data) {
 //            try {
 //                JSONObject jsonObject = new JSONObject(data);
@@ -410,8 +482,29 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
 //                e.printStackTrace();
 //            }
         }
+
+        @JavascriptInterface
+        public void openCatalog() {
+            Log.d("TAG","点击了");
+          // bgAlpha(0.6f);
+            popupWindow1.showFilterPopup(ll_header);
+        }
+        @JavascriptInterface
+        public void openSearch() {
+            showSearchDialog();
+        }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        String num = SharedPreferencesUtils.getString(getActivity(), "cartNum");
+        if (StringUtil.isBlank(num)) {
+            num = "0";
+        }
+        count.setVisibility(View.VISIBLE);
+        count.setText(num + "");
+    }
 
     public class OpenFileWebChromeClient extends WebChromeClient {
         public static final int REQUEST_FILE_PICKER = 1;
