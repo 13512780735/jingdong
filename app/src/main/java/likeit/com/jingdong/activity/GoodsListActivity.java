@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -123,7 +124,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     private GoodsListModel goodsListModel;
     private TextView tv_date, tv_time;
     private FilterPopupWindow popupWindow;
-    private FilterPopupClassifyWindow popupWindow1;
+    private FilterPopupClassify01Window popupWindow1;
     private String temperature;
     private TextView tv_address;
     private String cidName1;
@@ -153,7 +154,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
                 //  WwIpView.setText("外网IP:" + msg.obj.toString());
                 ip = msg.obj.toString();
                 Log.d("TAG", "999-->" + ip);
-                initData();
+                initData1();
             }
         }
     };
@@ -177,6 +178,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     };
     private String address01;
     private String shopname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,8 +191,8 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         by = "";
         pricemin = "";
         pricemax = "";
-        cidName1=getIntent().getExtras().getString("cidName");
-        cid=getIntent().getExtras().getString("cid");
+        cidName1 = getIntent().getExtras().getString("cidName");
+        cid = getIntent().getExtras().getString("cid");
         keywords = getIntent().getExtras().getString("keywords");
         address01 = SharedPreferencesUtils.getString(mContext, "address");
         shopname = SharedPreferencesUtils.getString(mContext, "shopname");
@@ -259,7 +261,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         });
 
 
-        popupWindow1 = new FilterPopupClassifyWindow(GoodsListActivity.this);
+        popupWindow1 = new FilterPopupClassify01Window(GoodsListActivity.this);
         popupWindow1.setOnClassifyFinishListener(this);
         popupWindow1.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
@@ -272,7 +274,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
 
     private String weather, address;
 
-    private void initData() {
+    private void initData1() {
         Log.d("TAG", "9995-->" + ip);
         //   String url = ApiService.Weather + "?key=" + "2b53d9a689993" + "&ip=" + ip;
         String url = ApiService.Weather;
@@ -324,6 +326,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         search_content_et.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    keywords = search_content_et.getText().toString().trim();
                     initAdapter();
                     hideinfo();
                 }
@@ -339,7 +342,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         rlBack = findViewById(R.id.rl_back);
         rlHome = findViewById(R.id.rl_home);
         rlTop = findViewById(R.id.rl_top);
-        tv_address =findViewById(R.id.tv_address);
+        tv_address = findViewById(R.id.tv_address);
         tv_address.setText(address01 + "(" + shopname + ")");
 //        rlBack.setOnClickListener(this);
 //        rlHome.setOnClickListener(this);
@@ -364,6 +367,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         mTvSynthesisSort.setTextColor(Color.parseColor("#F93955"));
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.rgb(47, 223, 189));
+        data.clear();
         initAdapter();
 
     }
@@ -378,6 +382,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
 
     private void initAdapter() {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 6));
+        //  mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new GoodListAdapter(R.layout.good_listview_items, data);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
@@ -403,16 +408,16 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
     private void initData(int pageNum, final boolean isloadmore) {
         String openid = SharedPreferencesUtils.getString(mContext, "openid");
         String dealer_id = SharedPreferencesUtils.getString(mContext, "dealer_id");
-        Log.e("openid-->", openid);
-        Log.e("keyword-->", keywords);
-        Log.e("attribute-->", attribute);
-        Log.e("merchid-->", merchid);
-        Log.e("order-->", order);
-        Log.e("by-->", by);
-        Log.e("pricemin-->", pricemin);
-        Log.e("pricemax-->", pricemax);
-        Log.e("cid-->", cid);
-        keywords = search_content_et.getText().toString().trim();
+        Log.d("openid-->", openid);
+        Log.d("keyword-->", keywords);
+        Log.d("attribute-->", attribute);
+        Log.d("merchid-->", merchid);
+        Log.d("order-->", order);
+        Log.d("by-->", by);
+        Log.d("pricemin-->", pricemin);
+        Log.d("pricemax-->", pricemax);
+        Log.d("cid-->", cid);
+
         RetrofitUtil.getInstance().getGoodsList(openid, dealer_id, keywords, attribute, merchid, brandsid, order, by, pricemin, pricemax, String.valueOf(pageNum), cid, new Subscriber<BaseResponse<GoodsListModel>>() {
             @Override
             public void onCompleted() {
@@ -662,6 +667,7 @@ public class GoodsListActivity extends BaseActivity implements View.OnClickListe
         Log.d("TAG", "9992-->" + brandsid01);
         attribute = attribute01;
         brandsid = brandsid01;
+
         initAdapter();
     }
 

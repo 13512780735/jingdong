@@ -110,8 +110,8 @@ public class GoodsListMoreModel {
             private String thumb_url;
             private String marketprice;
             private String productprice;
-            private int minprice;
-            private int maxprice;
+            private String minprice;
+            private String maxprice;
             private String isdiscount;
             private String isdiscount_time;
             private String isdiscount_discounts;
@@ -135,7 +135,7 @@ public class GoodsListMoreModel {
             private String buygroups;
             private String levelbuy;
             private String groupbuy;
-            private int seecommission;
+            private String seecommission;
             private String cansee;
             private String seetitle;
 
@@ -195,19 +195,19 @@ public class GoodsListMoreModel {
                 this.productprice = productprice;
             }
 
-            public int getMinprice() {
+            public String getMinprice() {
                 return minprice;
             }
 
-            public void setMinprice(int minprice) {
+            public void setMinprice(String minprice) {
                 this.minprice = minprice;
             }
 
-            public int getMaxprice() {
+            public String getMaxprice() {
                 return maxprice;
             }
 
-            public void setMaxprice(int maxprice) {
+            public void setMaxprice(String maxprice) {
                 this.maxprice = maxprice;
             }
 
@@ -395,11 +395,11 @@ public class GoodsListMoreModel {
                 this.groupbuy = groupbuy;
             }
 
-            public int getSeecommission() {
+            public String getSeecommission() {
                 return seecommission;
             }
 
-            public void setSeecommission(int seecommission) {
+            public void setSeecommission(String seecommission) {
                 this.seecommission = seecommission;
             }
 

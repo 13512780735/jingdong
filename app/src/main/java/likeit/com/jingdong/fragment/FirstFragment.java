@@ -18,11 +18,8 @@ import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -30,9 +27,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.loopj.android.http.RequestParams;
-import com.tencent.smtt.sdk.CookieManager;
-import com.tencent.smtt.sdk.CookieSyncManager;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,21 +44,16 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import butterknife.BindView;
-import likeit.com.jingdong.MyApplication;
 import likeit.com.jingdong.R;
 import likeit.com.jingdong.activity.CartActivity;
-import likeit.com.jingdong.activity.FilterPopupClassifyWindow;
-import likeit.com.jingdong.activity.FilterPopupWindow;
+import likeit.com.jingdong.activity.FilterPopupClassify01Window;
 import likeit.com.jingdong.activity.GoodDescActivity;
 import likeit.com.jingdong.activity.GoodList01Activity;
 import likeit.com.jingdong.activity.GoodsListActivity;
 import likeit.com.jingdong.listener.OnClassifyFinishListener;
 import likeit.com.jingdong.listener.OnFinishListener;
 import likeit.com.jingdong.network.ApiService;
-import likeit.com.jingdong.network.model.WeatherModel;
 import likeit.com.jingdong.utils.HttpUtil;
-import likeit.com.jingdong.utils.IpGetUtil;
 import likeit.com.jingdong.utils.SharedPreferencesUtils;
 import likeit.com.jingdong.utils.StringUtil;
 import likeit.com.jingdong.view.BorderRelativeLayout;
@@ -101,7 +90,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener, OnC
     private TextView tv_address;
     private String address01;
     private String shopname;
-    private FilterPopupClassifyWindow popupWindow1;
+    private FilterPopupClassify01Window popupWindow1;
 
 
     @Override
@@ -184,7 +173,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener, OnC
     }
 
     private void initTopPop() {
-        popupWindow1 = new FilterPopupClassifyWindow(getActivity());
+        popupWindow1 = new FilterPopupClassify01Window(getActivity());
         popupWindow1.setOnClassifyFinishListener(this);
         popupWindow1.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override

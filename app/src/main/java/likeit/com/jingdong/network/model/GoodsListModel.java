@@ -68,7 +68,7 @@ public class GoodsListModel {
         private String thumb;
         private String marketprice;
         private String productprice;
-        private int minprice;
+        private String minprice;
         private String showsales;
         private String linkurl;
         private ParamsBean params;
@@ -114,11 +114,11 @@ public class GoodsListModel {
             this.productprice = productprice;
         }
 
-        public int getMinprice() {
+        public String getMinprice() {
             return minprice;
         }
 
-        public void setMinprice(int minprice) {
+        public void setMinprice(String minprice) {
             this.minprice = minprice;
         }
 
