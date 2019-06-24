@@ -312,6 +312,9 @@ public class GoodList01Activity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String id = data.get(position).getId();
+
+                Log.d("TAG","id-->"+id);
+                Log.d("TAG","position-->"+position);
                 Bundle bundle = new Bundle();
                 bundle.putString("id", id);
                 toActivity(GoodDescActivity.class, bundle);

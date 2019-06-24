@@ -114,6 +114,7 @@ public class GoodDescActivity extends BaseActivity {
     };
     private String address01;
     private String shopname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +127,7 @@ public class GoodDescActivity extends BaseActivity {
         shopname = SharedPreferencesUtils.getString(mContext, "shopname");
         id = getIntent().getExtras().getString("id");
         url = ApiService.Desc + "?dealerid=" + dealerid + "&openid=" + openid + "&id=" + id;
-        Log.d("TAG","url-->"+url);
+        Log.d("TAG", "url-->" + url);
         initUI();
         new TimeThread().start();
         GetNetIp();
@@ -238,7 +239,7 @@ public class GoodDescActivity extends BaseActivity {
 //        tv_time.setText(StringUtil.getTime());
         rlBack = findViewById(R.id.rl_back);
         mWebView = findViewById(R.id.main_web);
-        tv_address =findViewById(R.id.tv_address);
+        tv_address = findViewById(R.id.tv_address);
         tv_address.setText(address01 + "(" + shopname + ")");
         mWebView.loadUrl(url);
         tvRight = findViewById(R.id.tv_right);
@@ -250,7 +251,7 @@ public class GoodDescActivity extends BaseActivity {
         tvRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = new dialogCodeFragment(getApplicationContext());
+                dialog = new dialogCodeFragment(mContext);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
             }
@@ -296,18 +297,19 @@ public class GoodDescActivity extends BaseActivity {
             toActivity(MainActivity.class);
             AppManager.getAppManager().finishAllActivity();
         }
-
-        public void openCart(String data) {
+        @JavascriptInterface
+        public void openCart() {
             toActivity(CartActivity.class);
-            AppManager.getAppManager().finishAllActivity();
+            //AppManager.getAppManager().finishAllActivity();
         }
+
         @JavascriptInterface
         public void setCartNumber(String data) {
-            Log.d("TAG","data-->"+data);
+            Log.d("TAG", "data-->" + data);
             try {
                 JSONObject jsonObject = new JSONObject(data);
                 String num = jsonObject.optString("num");
-                SharedPreferencesUtils.put(mContext,"cartNum",num);
+                SharedPreferencesUtils.put(mContext, "cartNum", num);
                 Log.d("TAG88888", jsonObject.toString());
 //                if (listener != null) {
 //                    listener.onSuccess(1);
@@ -316,6 +318,7 @@ public class GoodDescActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+
         @JavascriptInterface
         public void back() {
             finish();
