@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements OnFinishListener {
     @Override
     public void onSuccess(int position) {
         if (position == 1) {
-            mRadioGroup.clearCheck();
+           // mRadioGroup.clearCheck();
             option_1.setChecked(true);
         }
     }

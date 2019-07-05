@@ -18,80 +18,80 @@
         android:orientation="vertical">
 
 
-        <TextView
-            android:id="@+id/tv_title"
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/dp_10"
+        android:text="请输入登录密码"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_24" />
+
+
+    <likeit.com.jingdong.view.BorderRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="@dimen/dp_10"
+        app:contentBackColor="@color/white"
+        app:cornerRadius="@dimen/dp_5"
+        app:strokeColor01="#999999"
+        app:strokeWidth01="1dp">
+
+        <EditText
+            android:id="@+id/edpwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dp_10"
-            android:text="请输入登录密码"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:hint="请输入登录密码"
+            android:inputType="textPassword"
+            android:padding="@dimen/dp_5"
+            android:textSize="@dimen/txt_24" />
+    </likeit.com.jingdong.view.BorderRelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_cancle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width20"
+            android:layout_weight="1"
+            android:background="@drawable/shape_search_round_white_15"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="取消"
             android:textColor="@color/black"
             android:textSize="@dimen/txt_24" />
 
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width20"
+            android:layout_weight="1"
+            android:background="@drawable/shape_search_round_red_15"
+            android:gravity="center"
+            android:padding="@dimen/dp_5"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_24" />
 
-        <likeit.com.jingdong.view.BorderRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_margin="@dimen/dp_10"
-            app:contentBackColor="@color/white"
-            app:cornerRadius="@dimen/dp_5"
-            app:strokeColor01="#999999"
-            app:strokeWidth01="1dp">
-
-            <EditText
-                android:id="@+id/edpwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:hint="请输入登录密码"
-                android:inputType="textPassword"
-                android:padding="@dimen/dp_5"
-                android:textSize="@dimen/txt_24" />
-        </likeit.com.jingdong.view.BorderRelativeLayout>
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/tv_cancle"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="@dimen/width20"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@drawable/shape_search_round_white_15"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="@dimen/dp_5"-->
-        <!--android:text="取消"-->
-        <!--android:textColor="@color/black"-->
-        <!--android:textSize="@dimen/txt_24" />-->
-
+    </LinearLayout>
+        <!--</LinearLayout>-->
         <!--<TextView-->
         <!--android:id="@+id/tv_confirm"-->
-        <!--android:layout_width="0dp"-->
+        <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_margin="@dimen/width20"-->
-        <!--android:layout_weight="1"-->
         <!--android:background="@drawable/shape_search_round_red_15"-->
         <!--android:gravity="center"-->
         <!--android:padding="@dimen/dp_5"-->
         <!--android:text="确定"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:textSize="@dimen/txt_24" />-->
-
-
-        <!--</LinearLayout>-->
-        <TextView
-        android:id="@+id/tv_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/width20"
-        android:background="@drawable/shape_search_round_red_15"
-        android:gravity="center"
-        android:padding="@dimen/dp_5"
-        android:text="确定"
-        android:textColor="@color/white" />
+        <!--android:textColor="@color/white" />-->
     </LinearLayout>
 </RelativeLayout>

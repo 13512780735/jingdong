@@ -64,6 +64,7 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
     private String shopname;
     private ImageView tvRight;
     private dialogCodeFragment dialog01;
+    private boolean flag = true;
 
 
     class TimeThread extends Thread {
@@ -81,6 +82,7 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
             } while (true);
         }
     }
+
     private String ip;
     public Handler handler = new Handler() {
         @Override
@@ -121,14 +123,19 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
         ll_bg = view.findViewById(R.id.ll_bg);
         address01 = SharedPreferencesUtils.getString(getActivity(), "address");
         shopname = SharedPreferencesUtils.getString(getActivity(), "shopname");
-        dialogShow();
+        dialog = new dialogFragment();
+        if (flag) {
+            dialogShow();
+        }
         initUI(view);
+
         new TimeThread().start();
         GetNetIp();
         return view;
     }
 
     TextView tv_date, tv_time;
+
     public void GetNetIp() {
         new Thread() {
             @Override
@@ -221,13 +228,15 @@ public class FourthFragment extends Fragment implements OnLoginInforCompleted {
             }
         });
     }
+
     private void dialogShow() {
+        flag = false;
         tv_date = view.findViewById(R.id.tv_date);
         tv_time = view.findViewById(R.id.tv_time);
 //        tv_date.setText(StringUtil.getCurrentDate());
 //        tv_time.setText(StringUtil.getTime());
         ll_bg.setVisibility(View.GONE);
-        dialogFragment dialog = new dialogFragment();
+
         dialog.setOnLoginInforCompleted(this);
         dialog.show(this.getFragmentManager(), "dialogFragment");
     }
